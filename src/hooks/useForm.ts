@@ -1,7 +1,7 @@
-import { useState, ChangeEvent } from 'react';
+import { useState, ChangeEvent, MouseEvent } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import getOpenAICompletion from '@api/openAI';
-import { formValuesProps } from '@types';
+import { formValuesProps } from '@@types/form';
 
 const useForm = (
   initialValues: formValuesProps,
@@ -26,7 +26,7 @@ const useForm = (
     if (!error) setIsValid(true);
   };
 
-  const handleSubmit = async e => {
+  const handleSubmit = async (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     try {
       handleValidate();

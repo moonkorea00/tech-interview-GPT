@@ -4,7 +4,7 @@ import DropDownOptions from './DropDownOptions';
 import OptionsInput from './Input';
 import { DropDownSVG } from './Svg';
 import useOnClickOutside from '@hooks/useOnClickOutside';
-import { formValuesProps } from '@types';
+import { formValuesProps } from '@@types/form';
 
 type Options = { [key: string]: string };
 type InterviewOptionsProps = {

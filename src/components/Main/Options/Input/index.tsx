@@ -1,7 +1,7 @@
 import { useState, ChangeEvent } from 'react';
 import eyeVisible from '@assets/eye-visible.svg';
 import eyeHidden from '@assets/eye-hidden.svg';
-import { formValuesProps } from '@types';
+import { formValuesProps } from '@@types/form';
 
 type OptionsInputProps = {
   name: string;

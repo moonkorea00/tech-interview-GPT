@@ -14,7 +14,7 @@ export const options: Options = {
     senior: 'Senior',
   },
   lang: {
-    asd: 'English',
+    'en-US': 'English',
     'cmn-Hans-CN': '中文',
     'fr-FR': 'Français',
     'ko-KR': '한국어',

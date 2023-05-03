@@ -5,13 +5,29 @@ import RequestSection from './RequestSection';
 import { OPTIONS_DATA } from './Options/constants';
 import useForm from '@hooks/useForm';
 import { validateRequestOptions } from '@utils/validateRequestOptions';
+import useSpeechRecognition from '@hooks/useSpeechRecognition';
 
 const Main = () => {
   const [queryOptions] = useSearchParams();
-  const { modelResponse, isValid, loading, formValues, handleChange, handleValidate, handleSubmit } =
-    useForm({ apiKey: '' }, () =>
-      validateRequestOptions(queryOptions, formValues)
-    );
+
+  const {
+    transcript,
+    setTranscript,
+    isRecording,
+    startSpeechRecognition,
+    stopSpeechRecognition,
+  } = useSpeechRecognition();
+  const {
+    modelResponse,
+    isValid,
+    loading,
+    formValues,
+    handleChange,
+    handleValidate,
+    handleSubmit,
+  } = useForm({ apiKey: '' }, () =>
+    validateRequestOptions(queryOptions, formValues)
+  );
 
   return (
     <main className="flex flex-col mt-20">
@@ -26,7 +42,15 @@ const Main = () => {
         ))}
       </div>
       <div className="flex flex-col gap-7 mt-8">
-        <RequestSection isValid={isValid} handleValidate={handleValidate} />
+        <RequestSection
+          isValid={isValid}
+          handleValidate={handleValidate}
+          handleSubmit={handleSubmit}
+          transcript={transcript}
+          isRecording={isRecording}
+          startSpeechRecognition={startSpeechRecognition}
+          stopSpeechRecognition={stopSpeechRecognition}
+        />
         <ResponseSection modelResponse={modelResponse} />
       </div>
     </main>
