@@ -4,12 +4,14 @@ import ResponseSection from './ResponseSection';
 import RequestSection from './RequestSection';
 import { OPTIONS_DATA } from './Options/constants';
 import useForm from '@hooks/useForm';
-import { validateRequestOptions } from '@utils/validateRequestOptions';
 import useSpeechRecognition from '@hooks/useSpeechRecognition';
+import useGetQuestion from '@hooks/useGetQuestion';
+import { validateRequestOptions } from '@utils/validateRequestOptions';
 
 const Main = () => {
   const [queryOptions] = useSearchParams();
 
+  const { question, setQuestion, handleGetQuestion } = useGetQuestion();
   const {
     transcript,
     setTranscript,
@@ -19,39 +21,44 @@ const Main = () => {
   } = useSpeechRecognition();
   const {
     modelResponse,
+    setModelResponse,
     isValid,
-    loading,
+    isLoading,
     formValues,
     handleChange,
     handleValidate,
     handleSubmit,
-  } = useForm({ apiKey: '' }, () =>
+  } = useForm({ apiKey: '', transcript, question }, () =>
     validateRequestOptions(queryOptions, formValues)
   );
 
   return (
-    <main className="flex flex-col mt-20">
+    <main className="flex flex-col gap-10 mb-28">
       <div className="flex">
         {OPTIONS_DATA.map(option => (
           <InterviewOptions
             key={option.id}
-            optionProps={option}
-            formValues={formValues}
-            handleChange={handleChange}
+            {...{ option, formValues, handleChange }}
           />
         ))}
       </div>
-      <div className="flex flex-col gap-7 mt-8">
+      <div className="flex flex-col gap-14 mt-6">
         <RequestSection
-          isValid={isValid}
-          handleValidate={handleValidate}
-          handleSubmit={handleSubmit}
-          transcript={transcript}
-          isRecording={isRecording}
-          startSpeechRecognition={startSpeechRecognition}
-          stopSpeechRecognition={stopSpeechRecognition}
+          {...{
+            isValid,
+            isLoading,
+            handleValidate,
+            handleSubmit,
+            transcript,
+            setTranscript,
+            isRecording,
+            startSpeechRecognition,
+            stopSpeechRecognition,
+            handleGetQuestion,
+            setQuestion,
+          }}
         />
-        <ResponseSection modelResponse={modelResponse} />
+        <ResponseSection {...{ modelResponse, isValid, question, isLoading }} />
       </div>
     </main>
   );

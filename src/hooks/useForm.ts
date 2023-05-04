@@ -2,10 +2,11 @@ import { useState, ChangeEvent } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import getOpenAICompletion from '@api/openAI';
 import { formValuesProps } from '@@types/form';
+import { initialResponse } from '@utils/form';
 
 const useForm = (initialValues: formValuesProps, onValidate: () => void) => {
   const [formValues, setFormValues] = useState(initialValues);
-  const [modelResponse, setModelResponse] = useState('');
+  const [modelResponse, setModelResponse] = useState(initialResponse);
   const [isValid, setIsValid] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [searchParams] = useSearchParams();
