@@ -31,7 +31,9 @@ const useSpeechRecognition = () => {
         .join('');
       setTranscript(text);
     };
-
+    recognition.onend = () => {
+      setIsRecording(false);
+    };
     if (isRecording) {
       recognition.start();
       recognition.addEventListener('result', handleSpeechResult);
