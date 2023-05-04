@@ -1,16 +1,13 @@
-import { useState, ChangeEvent, MouseEvent } from 'react';
+import { useState, ChangeEvent } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import getOpenAICompletion from '@api/openAI';
 import { formValuesProps } from '@@types/form';
 
-const useForm = (
-  initialValues: formValuesProps,
-  onValidate: () => { [key: string]: string }
-) => {
+const useForm = (initialValues: formValuesProps, onValidate: () => void) => {
   const [formValues, setFormValues] = useState(initialValues);
   const [modelResponse, setModelResponse] = useState('');
   const [isValid, setIsValid] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [searchParams] = useSearchParams();
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -21,28 +18,33 @@ const useForm = (
   };
 
   const handleValidate = () => {
-    const { error } = onValidate();
-    setModelResponse(error);
-    if (!error) setIsValid(true);
+    try {
+      onValidate();
+      setIsValid(true);
+    } catch (err) {
+      if (err instanceof Error) {
+        setModelResponse(err.message);
+      }
+    }
   };
 
-  const handleSubmit = async (e: MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
+  const handleSubmit = async () => {
     try {
       handleValidate();
-      setLoading(true);
-      await getOpenAICompletion(searchParams, formValues);
+      setIsLoading(true);
+      // await getOpenAICompletion(searchParams, formValues);
     } catch (err) {
       // setModelResponse()
     } finally {
-      setLoading(false);
+      setIsLoading(false);
     }
   };
 
   return {
     modelResponse,
+    setModelResponse,
     isValid,
-    loading,
+    isLoading,
     formValues,
     handleChange,
     handleValidate,

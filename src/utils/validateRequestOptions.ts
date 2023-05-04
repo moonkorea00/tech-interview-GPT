@@ -34,9 +34,9 @@ export const validateRequestOptions = (
   const stateErrors = validateState(apiKey);
 
   const errors = [...searchParamsErrors, ...stateErrors];
-  const errorMessage = `Before we start, fill out the following options : ${errors?.join(
-    ', '
-  )}`;
 
-  return { error: errors.length > 0 ? errorMessage : '' };
+  if (errors.length > 0) {
+    const errorMessage = `Before we start, fill out the following options : ${errors.join(', ')}`;
+    throw new Error(errorMessage);
+  }
 };
