@@ -21,6 +21,9 @@ input:focus {
   outline: none;
   border: none;
 }
+textarea {
+  resize: none;
+}
 iframe,
 h1,
 h2,

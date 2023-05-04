@@ -4,8 +4,7 @@ import Heading from '../Heading';
 
 const RootLayout = () => {
   return (
-    <div className="flex flex-col justify-center items-center mx-w-7xl">
-       {/* border border-black border-solid */}
+    <div className="flex flex-col justify-center items-center gap-10">
       <Header />
       <Heading />
       <Outlet />

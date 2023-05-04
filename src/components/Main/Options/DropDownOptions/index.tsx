@@ -26,12 +26,12 @@ const DropDownOptions = ({
   };
 
   return (
-    <ul className="absolute mt-1 max-h-56 w-full rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+    <ul className="absolute mt-1 max-h-56 w-full rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm z-10">
       {Object.keys(options).map((value, i) => (
         <li
           key={i}
           onClick={() => handleOptionsParam(name, value)}
-          className="w-full relative py-2 pl-3 pr-9 text-gray-900 cursor-pointer hover:bg-indigo-100"
+          className="w-full relative py-2 pl-3 pr-9 cursor-pointer hover:bg-indigo-100"
         >
           <div className="flex items-center">
             <span
@@ -47,7 +47,7 @@ const DropDownOptions = ({
           <span
             className={`${
               selectedOption === options[value]
-                ? 'text-indigo-600'
+                ? 'text-primary'
                 : 'text-white'
             } absolute inset-y-0 right-0 flex items-center pr-4`}
           >

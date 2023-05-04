@@ -1,20 +1,13 @@
 const Heading = () => {
   return (
-    <div
-      className="flex flex-col justify-center items-center gap-7 mt-10"
-      // border border-black border-solid
-    >
-      <h1 className="text-5xl font-semibold">
-        Tech Interview{' '}
-        <span className="underline decoration-green-600">GPT</span>
+    <div className="flex flex-col justify-center items-center gap-7 my-10">
+      <h1 className="text-6xl font-semibold">
+        Tech Interview <span className="underline decoration-green">GPT</span>
       </h1>
-      <p className="w-[800px] text-xl font-light">
-        Start a{' '}
-        <span className="underline decoration-sky-500">speech to text</span>{' '}
-        Tech Interview with an AI Senior Developer and{' '}
-        <span className="underline decoration-sky-500">
-          get Instant Feedback
-        </span>
+      <p className="w-full text-2xl font-light">
+        Start a <span className="underline decoration-sky">speech to text</span>{' '}
+        Tech Interview with an Senior AI Web Developer and{' '}
+        <span className="underline decoration-sky">get Instant Feedback</span>
       </p>
     </div>
   );
