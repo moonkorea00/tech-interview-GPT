@@ -5,7 +5,7 @@ import { formValuesProps } from '@@types/form';
 
 type OptionsInputProps = {
   name: string;
-  formValues: formValuesProps;
+  // formValues: formValuesProps;
   handleChange: (e: ChangeEvent<HTMLInputElement>) => void;
 };
 
@@ -21,7 +21,7 @@ const OptionsInput = ({
       <input
         type={isInputTypePassword ? 'password' : 'text'}
         name={name}
-        value={formValues[name]}
+        value={formValues[name as keyof typeof formValues]}
         onChange={handleChange}
         className=" w-full rounded-md bg-white py-1.5 pl-3 pr-10 text-left shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-2 focus:ring-secondary sm:text-sm sm:leading-6"
       />

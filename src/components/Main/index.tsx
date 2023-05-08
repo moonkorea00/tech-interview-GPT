@@ -1,4 +1,3 @@
-import { useSearchParams } from 'react-router-dom';
 import InterviewOptions from './Options';
 import ResponseSection from './ResponseSection';
 import RequestSection from './RequestSection';
@@ -7,33 +6,30 @@ import useForm from '@hooks/useForm';
 import useSpeechRecognition from '@hooks/useSpeechRecognition';
 import useGetQuestion from '@hooks/useGetQuestion';
 import { validateRequestOptions } from '@utils/validateRequestOptions';
+import { useSearchParams } from 'react-router-dom';
 
 const Main = () => {
-  const [queryOptions] = useSearchParams();
+  const [queryParams] = useSearchParams();
 
-  const { question, setQuestion, handleGetQuestion } = useGetQuestion();
   const {
-    transcript,
-    setTranscript,
-    isRecording,
-    startSpeechRecognition,
-    stopSpeechRecognition,
-  } = useSpeechRecognition();
-  const {
-    modelResponse,
-    setModelResponse,
-    isValid,
-    isLoading,
     formValues,
+    dispatch,
     handleChange,
-    handleValidate,
-    handleSubmit,
-  } = useForm({ apiKey: '', transcript, question }, () =>
-    validateRequestOptions(queryOptions, formValues)
+    handleValidateForm,
+    handleSubmitForm,
+    handleEditMode,
+    handleSaveEdit,
+    handleCancelEdit,
+  } = useForm(() => validateRequestOptions(queryParams));
+  const { handleGetQuestion } = useGetQuestion(
+    dispatch,
+    formValues.isValid,
   );
+  const { isRecording, startSpeechRecognition, stopSpeechRecognition } =
+    useSpeechRecognition(dispatch);
 
   return (
-    <main className="flex flex-col gap-10 mb-28">
+    <main className="flex flex-col gap-4">
       <div className="flex">
         {OPTIONS_DATA.map(option => (
           <InterviewOptions
@@ -45,20 +41,20 @@ const Main = () => {
       <div className="flex flex-col gap-14 mt-6">
         <RequestSection
           {...{
-            isValid,
-            isLoading,
-            handleValidate,
-            handleSubmit,
-            transcript,
-            setTranscript,
+            formValues,
+            handleChange,
+            handleValidateForm,
+            handleSubmitForm,
             isRecording,
             startSpeechRecognition,
             stopSpeechRecognition,
             handleGetQuestion,
-            setQuestion,
+            handleEditMode,
+            handleSaveEdit,
+            handleCancelEdit,
           }}
         />
-        <ResponseSection {...{ modelResponse, isValid, question, isLoading }} />
+        <ResponseSection formValues={formValues} />
       </div>
     </main>
   );

@@ -1,55 +1,66 @@
-import { useState, ChangeEvent } from 'react';
+import { useReducer, ChangeEvent } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import getOpenAICompletion from '@api/openAI';
-import { formValuesProps } from '@@types/form';
-import { initialResponse } from '@utils/form';
+import { initialState, formReducer } from '@reducer/formReducer';
 
-const useForm = (initialValues: formValuesProps, onValidate: () => void) => {
-  const [formValues, setFormValues] = useState(initialValues);
-  const [modelResponse, setModelResponse] = useState(initialResponse);
-  const [isValid, setIsValid] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+const useForm = (onValidate: VoidFunction) => {
+  const [formValues, dispatch] = useReducer(formReducer, initialState);
+  const { transcript, editedTranscript } = formValues;
   const [searchParams] = useSearchParams();
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const { value, name } = e.target;
-    setFormValues(prev => {
-      return { ...prev, [name]: value };
-    });
+  const handleChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
+    dispatch({ type: 'UPDATE_FORM', payload: { name, value } });
   };
 
-  const handleValidate = () => {
+  const handleValidateForm = () => {
     try {
       onValidate();
-      setIsValid(true);
+      dispatch({ type: 'VALIDATION_VALID' });
     } catch (err) {
       if (err instanceof Error) {
-        setModelResponse(err.message);
+        dispatch({ type: 'VALIDATION_ERROR', payload: err.message });
       }
     }
   };
 
-  const handleSubmit = async () => {
+  const handleSubmitForm = async () => {
     try {
-      handleValidate();
-      setIsLoading(true);
-      // await getOpenAICompletion(searchParams, formValues);
+      handleValidateForm();
+      dispatch({ type: 'FETCH_INIT' });
+      // TODO : await getOpenAICompletion(searchParams, formValues);
+      // TODO :dispatch({ type: 'FETCH_SUCCESS', payload: res });
     } catch (err) {
-      // setModelResponse()
+      // TODO : handle axios error type
+      // TODO : dispatch({ type: 'FETCH_ERROR', payload: err.message });
     } finally {
-      setIsLoading(false);
+      dispatch({ type: 'FETCH_SETTLED' });
     }
   };
 
+  const handleEditMode = () => {
+    dispatch({ type: 'START_EDIT', payload: transcript });
+  };
+
+  const handleSaveEdit = () => {
+    dispatch({ type: 'SAVE_EDIT', payload: editedTranscript });
+  };
+
+  const handleCancelEdit = () => {
+    dispatch({ type: 'CANCEL_EDIT', payload: transcript });
+  };
+
   return {
-    modelResponse,
-    setModelResponse,
-    isValid,
-    isLoading,
     formValues,
+    dispatch,
     handleChange,
-    handleValidate,
-    handleSubmit,
+    handleValidateForm,
+    handleSubmitForm,
+    handleEditMode,
+    handleSaveEdit,
+    handleCancelEdit,
   };
 };
 

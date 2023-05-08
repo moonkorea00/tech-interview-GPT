@@ -1,24 +1,25 @@
-import { Dispatch, SetStateAction } from 'react';
+import { ChangeEvent } from 'react';
 
 type RequestInputProps = {
   transcript: string;
   isEditing: boolean;
   editedTranscript: string;
-  setEditedTranscript: Dispatch<SetStateAction<string>>;
+  handleChange: (e: ChangeEvent<HTMLTextAreaElement>) => void;
 };
 
 const RequestInput = ({
-  transcript,
   isEditing,
+  transcript,
   editedTranscript,
-  setEditedTranscript,
+  handleChange,
 }: RequestInputProps) => {
   return (
     <>
       {isEditing ? (
         <textarea
-          defaultValue={editedTranscript}
-          onChange={e => setEditedTranscript(e.target.value)}
+          name="editedTranscript"
+          value={editedTranscript}
+          onChange={handleChange}
           className="flex flex-col justify-center w-full min-h-[200px] p-4 mb-8 border border-black/10 leading-6 rounded-md focus:outline-none focus:ring-2 focus:ring-secondary shadow-sectionInput"
           autoFocus
         />

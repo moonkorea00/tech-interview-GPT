@@ -1,59 +1,38 @@
-import { useState, Dispatch, SetStateAction } from 'react';
+import { ChangeEvent } from 'react';
 import RequestInput from './RequestInput';
 import { PrimaryButton, SecondaryButton } from '@components/common/Button';
 import user from '@assets/user.svg';
+import { State } from '@@types/form';
 
 type RequestSectionProps = {
-  isValid: boolean;
-  isLoading: boolean;
-  handleValidate: () => void;
-  handleSubmit: () => Promise<void>;
-  transcript: string;
-  setTranscript: Dispatch<SetStateAction<string>>;
+  formValues: State;
+  handleChange: (e: ChangeEvent<HTMLTextAreaElement>) => void;
+  handleValidateForm: () => void;
+  handleSubmitForm: () => Promise<void>;
   isRecording: boolean;
   startSpeechRecognition: () => void;
   stopSpeechRecognition: () => void;
   handleGetQuestion: () => void;
-  setQuestion: Dispatch<SetStateAction<string>>;
+  handleEditMode: () => void;
+  handleSaveEdit: () => void;
+  handleCancelEdit: () => void;
 };
 
 const RequestSection = ({
-  isValid,
-  isLoading,
-  handleValidate,
-  handleSubmit,
-  transcript,
-  setTranscript,
+  formValues,
+  handleChange,
+  handleValidateForm,
+  handleSubmitForm,
   isRecording,
   startSpeechRecognition,
   stopSpeechRecognition,
   handleGetQuestion,
-  setQuestion,
+  handleEditMode,
+  handleSaveEdit,
+  handleCancelEdit,
 }: RequestSectionProps) => {
-  const [isEditing, setIsEditing] = useState(false);
-  const [editedTranscript, setEditedTranscript] = useState(transcript);
-
-  const submitTranscriptAndResetQuestion = () => {
-    handleSubmit();
-    // console.log('submit');
-    setQuestion('');
-  };
-
-  const handleGetQuestionAndResetTranscripts = () => {
-    handleGetQuestion();
-    setEditedTranscript('');
-    setTranscript('');
-  };
-
-  const handleSave = () => {
-    setTranscript(editedTranscript);
-    setIsEditing(false);
-  };
-
-  const handleCancel = () => {
-    setEditedTranscript(transcript);
-    setIsEditing(false);
-  };
+  const { transcript, editedTranscript, isValid, isEditing, isLoading } =
+    formValues;
 
   return (
     <div className="flex flex-col w-[950px]">
@@ -64,22 +43,17 @@ const RequestSection = ({
             transcript,
             isEditing,
             editedTranscript,
-            setEditedTranscript,
+            handleChange,
           }}
         />
       </div>
       <div className="flex justify-center relative items-center gap-3">
-        {!isValid && (
-          <PrimaryButton onClickHandler={handleValidate}>
-            Start Interview
-          </PrimaryButton>
-        )}
-        {isValid && (
+        {isValid ? (
           <>
             <PrimaryButton
               onClickHandler={
                 transcript && !isRecording
-                  ? submitTranscriptAndResetQuestion
+                  ? handleSubmitForm
                   : isRecording
                   ? stopSpeechRecognition
                   : startSpeechRecognition
@@ -94,24 +68,28 @@ const RequestSection = ({
                 : 'Start Recording Answer'}
             </PrimaryButton>
             <SecondaryButton
-              onClickHandler={isEditing ? handleSave : () => setIsEditing(true)}
+              onClickHandler={isEditing ? handleSaveEdit : handleEditMode}
               disabled={isRecording}
             >
               {isEditing ? 'Save' : 'Edit'}
             </SecondaryButton>
             {isEditing && (
-              <SecondaryButton onClickHandler={handleCancel}>
+              <SecondaryButton onClickHandler={handleCancelEdit}>
                 Cancel
               </SecondaryButton>
             )}
             <SecondaryButton
-              onClickHandler={handleGetQuestionAndResetTranscripts}
+              onClickHandler={handleGetQuestion}
               disabled={isRecording || isEditing}
               className="absolute right-0"
             >
               Change question
             </SecondaryButton>
           </>
+        ) : (
+          <PrimaryButton onClickHandler={handleValidateForm}>
+            Start Interview
+          </PrimaryButton>
         )}
       </div>
     </div>

@@ -1,9 +1,9 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Dispatch } from 'react';
 import { useSearchParams } from 'react-router-dom';
+import { Action } from '@@types/form';
 
-const useSpeechRecognition = () => {
-  const [transcript, setTranscript] = useState('');
+const useSpeechRecognition = (dispatch: Dispatch<Action>) => {
   const [isRecording, setIsRecording] = useState(false);
   const [searchParams] = useSearchParams();
 
@@ -29,11 +29,13 @@ const useSpeechRecognition = () => {
         .map(result => result[0])
         .map(result => result.transcript)
         .join('');
-      setTranscript(text);
+      dispatch({ type: 'UPDATE_TRANSCRIPT', payload: text });
     };
+
     recognition.onend = () => {
       setIsRecording(false);
     };
+
     if (isRecording) {
       recognition.start();
       recognition.addEventListener('result', handleSpeechResult);
@@ -49,8 +51,6 @@ const useSpeechRecognition = () => {
   }, [isRecording]);
 
   return {
-    transcript,
-    setTranscript,
     isRecording,
     startSpeechRecognition,
     stopSpeechRecognition,
