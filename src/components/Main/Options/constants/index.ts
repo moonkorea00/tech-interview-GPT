@@ -45,5 +45,3 @@ export const OPTIONS_DATA = [
   },
   { id: 4, label: 'OpenAI API Key', name: 'apiKey', type: 'input' },
 ];
-
-export const queryKeys = Object.keys(options);
