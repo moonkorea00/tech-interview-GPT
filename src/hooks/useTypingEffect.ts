@@ -21,7 +21,7 @@ const useTypingEffect = (value: string) => {
         }
         return prev + value[i++];
       });
-    }, 25);
+    }, 5);
 
     return () => {
       setText('');
