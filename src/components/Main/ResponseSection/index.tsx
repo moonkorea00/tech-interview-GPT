@@ -14,7 +14,9 @@ const ResponseSection = ({ formValues }: ResponseSectionProps) => {
     <div className="flex w-[950px]">
       <img src={ChatGPT} alt="ChatGPT" className="w-[45px] mr-4 self-start" />
       <section className="flex flex-col justify-center w-full min-h-[50px] p-4 border border-border-default leading-6 rounded-md shadow-sectionInput">
-        {isLoading ? 'loading' : animatedString}
+        <span className="whitespace-pre-line">
+          {isLoading ? 'loading' : animatedString}
+        </span>
       </section>
     </div>
   );

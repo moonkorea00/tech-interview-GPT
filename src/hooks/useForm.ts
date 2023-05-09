@@ -3,7 +3,6 @@ import { useSearchParams } from 'react-router-dom';
 import { AxiosError } from 'axios';
 import { initialState, formReducer } from '@reducer/formReducer';
 import fetchOpenAiCompletion from '@api/openAI';
-import { formatLineBreak } from '@utils/form';
 
 const useForm = (onValidate: VoidFunction) => {
   const [formValues, dispatch] = useReducer(formReducer, initialState);
@@ -36,7 +35,7 @@ const useForm = (onValidate: VoidFunction) => {
       dispatch({ type: 'API/FETCH_START' });
       const res = await fetchOpenAiCompletion(searchParams, formValues);
       console.log(res);
-      dispatch({ type: 'API/FETCH_SUCCESS', payload: formatLineBreak(res) });
+      dispatch({ type: 'API/FETCH_SUCCESS', payload: res });
     } catch (err) {
       console.log(err);
       if (err instanceof AxiosError) {

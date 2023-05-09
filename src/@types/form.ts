@@ -7,14 +7,14 @@ export interface formValuesProps {
 
 export interface State extends formValuesProps {
   isLoading: boolean;
-  modelResponse: string | JSX.Element[];
+  modelResponse: string
   isValid: boolean;
   isEditing: boolean;
 }
 
 export type Action =
   | { type: 'API/FETCH_START'; payload?: never }
-  | { type: 'API/FETCH_SUCCESS'; payload: JSX.Element[] }
+  | { type: 'API/FETCH_SUCCESS'; payload: string }
   | { type: 'API/FETCH_FAIL'; payload: string }
   | { type: 'API/FETCH_COMPLETE'; payload?: never }
   | { type: 'FORM/VALIDATION_SUCCESS'; payload?: never }
