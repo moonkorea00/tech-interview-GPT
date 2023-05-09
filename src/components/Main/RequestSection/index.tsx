@@ -35,7 +35,7 @@ const RequestSection = ({
     formValues;
 
   return (
-    <div className="flex flex-col w-[950px]">
+    <div className="w-[950px]">
       <div className="flex w-full">
         <img src={user} alt="user" className="w-[50px] mr-4 self-start" />
         <RequestInput
@@ -47,7 +47,7 @@ const RequestSection = ({
           }}
         />
       </div>
-      <div className="flex justify-center relative items-center gap-3">
+      <div className="flex justify-center items-center gap-3 relative">
         {isValid ? (
           <>
             <PrimaryButton

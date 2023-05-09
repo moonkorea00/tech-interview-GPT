@@ -21,15 +21,12 @@ const Main = () => {
     handleSaveEdit,
     handleCancelEdit,
   } = useForm(() => validateRequestOptions(queryParams));
-  const { handleGetQuestion } = useGetQuestion(
-    dispatch,
-    formValues.isValid,
-  );
+  const { handleGetQuestion } = useGetQuestion(dispatch, formValues.isValid);
   const { isRecording, startSpeechRecognition, stopSpeechRecognition } =
     useSpeechRecognition(dispatch);
 
   return (
-    <main className="flex flex-col gap-4">
+    <main className="flex flex-col items-center gap-12 mb-20">
       <div className="flex">
         {OPTIONS_DATA.map(option => (
           <InterviewOptions
@@ -38,7 +35,7 @@ const Main = () => {
           />
         ))}
       </div>
-      <div className="flex flex-col gap-14 mt-6">
+      <div className="flex flex-col gap-20">
         <RequestSection
           {...{
             formValues,

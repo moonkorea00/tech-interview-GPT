@@ -1,13 +1,15 @@
 import { Outlet } from 'react-router-dom';
-import Header from '../Header';
 import Heading from '../Heading';
+import Nav from '../Nav';
 
 const RootLayout = () => {
   return (
-    <div className="flex flex-col justify-center items-center gap-10">
-      <Header />
-      <Heading />
-      <Outlet />
+    <div className="flex w-full h-[100vh]">
+      <Nav />
+      <div className="flex flex-col items-center w-full h-full gap-8 pt-20 overflow-y-auto">
+        <Heading />
+        <Outlet />
+      </div>
     </div>
   );
 };
