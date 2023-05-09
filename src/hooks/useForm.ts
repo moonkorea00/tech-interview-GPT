@@ -1,55 +1,62 @@
 import { useReducer, ChangeEvent } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import getOpenAICompletion from '@api/openAI';
+import { AxiosError } from 'axios';
 import { initialState, formReducer } from '@reducer/formReducer';
+import fetchOpenAiCompletion from '@api/openAI';
+import { formatLineBreak } from '@utils/form';
 
 const useForm = (onValidate: VoidFunction) => {
   const [formValues, dispatch] = useReducer(formReducer, initialState);
-  const { transcript, editedTranscript } = formValues;
   const [searchParams] = useSearchParams();
+
+  const { apiKey, transcript, editedTranscript } = formValues;
 
   const handleChange = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = e.target;
-    dispatch({ type: 'UPDATE_FORM', payload: { name, value } });
+    dispatch({ type: 'FORM/UPDATE_FIELD', payload: { name, value } });
   };
 
   const handleValidateForm = () => {
     try {
       onValidate();
-      dispatch({ type: 'VALIDATION_VALID' });
+      dispatch({ type: 'FORM/VALIDATION_SUCCESS' });
     } catch (err) {
       if (err instanceof Error) {
-        dispatch({ type: 'VALIDATION_ERROR', payload: err.message });
+        dispatch({ type: 'FORM/VALIDATION_FAIL', payload: err.message });
       }
     }
   };
 
   const handleSubmitForm = async () => {
     try {
+      if (!apiKey) throw new AxiosError('Please provide your OpenAI API Key.');
       handleValidateForm();
-      dispatch({ type: 'FETCH_INIT' });
-      // TODO : await getOpenAICompletion(searchParams, formValues);
-      // TODO :dispatch({ type: 'FETCH_SUCCESS', payload: res });
+      dispatch({ type: 'API/FETCH_START' });
+      const res = await fetchOpenAiCompletion(searchParams, formValues);
+      console.log(res);
+      dispatch({ type: 'API/FETCH_SUCCESS', payload: formatLineBreak(res) });
     } catch (err) {
-      // TODO : handle axios error type
-      // TODO : dispatch({ type: 'FETCH_ERROR', payload: err.message });
+      console.log(err);
+      if (err instanceof AxiosError) {
+        dispatch({ type: 'API/FETCH_FAIL', payload: err.message });
+      }
     } finally {
-      dispatch({ type: 'FETCH_SETTLED' });
+      dispatch({ type: 'API/FETCH_COMPLETE' });
     }
   };
 
   const handleEditMode = () => {
-    dispatch({ type: 'START_EDIT', payload: transcript });
+    dispatch({ type: 'FORM/EDIT_START', payload: transcript });
   };
 
   const handleSaveEdit = () => {
-    dispatch({ type: 'SAVE_EDIT', payload: editedTranscript });
+    dispatch({ type: 'FORM/EDIT_SAVE', payload: editedTranscript });
   };
 
   const handleCancelEdit = () => {
-    dispatch({ type: 'CANCEL_EDIT', payload: transcript });
+    dispatch({ type: 'FORM/EDIT_CANCEL', payload: transcript });
   };
 
   return {

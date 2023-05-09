@@ -18,39 +18,29 @@ export const formReducer: Reducer<State, Action> = (
   { type, payload }
 ) => {
   switch (type) {
-    case 'FETCH_INIT':
-      return { ...state, loading: true };
-    // case 'FETCH_SUCCESS':
-    //   return { ...state, modelResponse: payload }; // TODO
-    case 'FETCH_ERROR':
+    case 'API/FETCH_START':
+      return { ...state, isLoading: true };
+    case 'API/FETCH_SUCCESS':
       return { ...state, modelResponse: payload };
-    case 'FETCH_SETTLED':
-      return { ...state, loading: false };
-    case 'UPDATE_FORM':
+    case 'API/FETCH_FAIL':
+      return { ...state, modelResponse: payload };
+    case 'API/FETCH_COMPLETE':
+      return { ...state, isLoading: false };
+    case 'FORM/VALIDATION_SUCCESS':
+      return { ...state, isValid: true };
+    case 'FORM/VALIDATION_FAIL':
+      return { ...state, modelResponse: payload };
+    case 'FORM/UPDATE_FIELD':
       return {
         ...state,
         [payload.name]: payload.value,
       };
-    case 'UPDATE_TRANSCRIPT':
+    case 'FORM/UPDATE_TRANSCRIPT':
       return {
         ...state,
         transcript: payload,
       };
-    case 'START_EDIT':
-      return { ...state, editedTranscript: payload, isEditing: true };
-    case 'SAVE_EDIT':
-      return {
-        ...state,
-        transcript: payload,
-        isEditing: false,
-      };
-    case 'CANCEL_EDIT':
-      return {
-        ...state,
-        editedTranscript: payload,
-        isEditing: false,
-      };
-    case 'GET_QUESTION':
+    case 'FORM/GET_QUESTION':
       return {
         ...state,
         question: payload,
@@ -58,10 +48,20 @@ export const formReducer: Reducer<State, Action> = (
         editedTranscript: '',
         modelResponse: payload,
       };
-    case 'VALIDATION_ERROR':
-      return { ...state, modelResponse: payload };
-    case 'VALIDATION_VALID':
-      return { ...state, isValid: true };
+    case 'FORM/EDIT_START':
+      return { ...state, editedTranscript: payload, isEditing: true };
+    case 'FORM/EDIT_SAVE':
+      return {
+        ...state,
+        transcript: payload,
+        isEditing: false,
+      };
+    case 'FORM/EDIT_CANCEL':
+      return {
+        ...state,
+        editedTranscript: payload,
+        isEditing: false,
+      };
     default:
       return state;
   }

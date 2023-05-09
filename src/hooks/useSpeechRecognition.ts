@@ -29,7 +29,7 @@ const useSpeechRecognition = (dispatch: Dispatch<Action>) => {
         .map(result => result[0])
         .map(result => result.transcript)
         .join('');
-      dispatch({ type: 'UPDATE_TRANSCRIPT', payload: text });
+      dispatch({ type: 'FORM/UPDATE_TRANSCRIPT', payload: text });
     };
 
     recognition.onend = () => {

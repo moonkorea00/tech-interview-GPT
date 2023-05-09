@@ -7,24 +7,24 @@ export interface formValuesProps {
 
 export interface State extends formValuesProps {
   isLoading: boolean;
-  modelResponse: string;
+  modelResponse: string | JSX.Element[];
   isValid: boolean;
   isEditing: boolean;
 }
 
 export type Action =
+  | { type: 'API/FETCH_START'; payload?: never }
+  | { type: 'API/FETCH_SUCCESS'; payload: JSX.Element[] }
+  | { type: 'API/FETCH_FAIL'; payload: string }
+  | { type: 'API/FETCH_COMPLETE'; payload?: never }
+  | { type: 'FORM/VALIDATION_SUCCESS'; payload?: never }
+  | { type: 'FORM/VALIDATION_FAIL'; payload: string }
   | {
-      type: 'UPDATE_FORM';
+      type: 'FORM/UPDATE_FIELD';
       payload: { name: keyof State | string; value: string };
     }
-  | { type: 'UPDATE_TRANSCRIPT'; payload: string }
-  | { type: 'START_EDIT'; payload: string }
-  | { type: 'SAVE_EDIT'; payload: string }
-  | { type: 'CANCEL_EDIT'; payload: string }
-  | { type: 'GET_QUESTION'; payload: string }
-  | { type: 'VALIDATION_ERROR'; payload: string }
-  | { type: 'VALIDATION_VALID'; payload?: never }
-  | { type: 'FETCH_INIT'; payload?: never }
-  | { type: 'FETCH_SUCCESS'; payload: any }
-  | { type: 'FETCH_ERROR'; payload: any }
-  | { type: 'FETCH_SETTLED'; payload?: never };
+  | { type: 'FORM/UPDATE_TRANSCRIPT'; payload: string }
+  | { type: 'FORM/GET_QUESTION'; payload: string }
+  | { type: 'FORM/EDIT_START'; payload: string }
+  | { type: 'FORM/EDIT_SAVE'; payload: string }
+  | { type: 'FORM/EDIT_CANCEL'; payload: string };
