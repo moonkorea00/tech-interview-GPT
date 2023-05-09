@@ -19,6 +19,7 @@ export default {
       },
       animation: {
         'fade-in-out': 'fadeInOut 1.2s linear infinite',
+        flicker: 'flicker 0.5s infinite',
       },
       keyframes: {
         fadeInOut: {
@@ -27,6 +28,17 @@ export default {
           },
           '50%': {
             opacity: '0.5',
+          },
+        },
+        flicker: {
+          '0%': {
+            opacity: 0,
+          },
+          '50%': {
+            opacity: 1,
+          },
+          '100%': {
+            opacity: 0,
           },
         },
       },
