@@ -1,6 +1,6 @@
 import useTypingEffect from '@hooks/useTypingEffect';
 import { FlickerSVG } from '../Options/Svg';
-import ChatGPT from '@assets/ChatGPT.svg';
+import ChatGPT from '@assets/Main/ChatGPT.svg';
 import { State } from '@@types/form';
 
 type ResponseSectionProps = {

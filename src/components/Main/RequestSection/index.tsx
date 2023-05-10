@@ -1,7 +1,7 @@
 import { ChangeEvent } from 'react';
 import RequestInput from './RequestInput';
 import { PrimaryButton, SecondaryButton } from '@components/common/Button';
-import user from '@assets/user.svg';
+import user from '@assets/Main/user.svg';
 import { State } from '@@types/form';
 
 type RequestSectionProps = {
