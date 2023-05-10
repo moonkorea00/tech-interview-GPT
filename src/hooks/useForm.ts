@@ -1,5 +1,5 @@
-import { useReducer, ChangeEvent } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useReducer, useEffect, ChangeEvent } from 'react';
+import { useSearchParams, useLocation } from 'react-router-dom';
 import { AxiosError } from 'axios';
 import { initialState, formReducer } from '@reducer/formReducer';
 import fetchOpenAiCompletion from '@api/openAI';
@@ -7,6 +7,7 @@ import fetchOpenAiCompletion from '@api/openAI';
 const useForm = (onValidate: VoidFunction) => {
   const [formValues, dispatch] = useReducer(formReducer, initialState);
   const [searchParams] = useSearchParams();
+  const { search } = useLocation();
 
   const { apiKey, transcript, editedTranscript } = formValues;
 
@@ -34,10 +35,8 @@ const useForm = (onValidate: VoidFunction) => {
       handleValidateForm();
       dispatch({ type: 'API/FETCH_START' });
       const res = await fetchOpenAiCompletion(searchParams, formValues);
-      console.log(res);
       dispatch({ type: 'API/FETCH_SUCCESS', payload: res });
     } catch (err) {
-      console.log(err);
       if (err instanceof AxiosError) {
         dispatch({ type: 'API/FETCH_FAIL', payload: err.message });
       }
@@ -57,6 +56,10 @@ const useForm = (onValidate: VoidFunction) => {
   const handleCancelEdit = () => {
     dispatch({ type: 'FORM/EDIT_CANCEL', payload: transcript });
   };
+
+  useEffect(() => {
+    if (!search) dispatch({ type: 'FORM/RESET' });
+  }, [search]);
 
   return {
     formValues,

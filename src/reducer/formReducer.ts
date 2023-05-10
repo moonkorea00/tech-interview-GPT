@@ -62,6 +62,8 @@ export const formReducer: Reducer<State, Action> = (
         editedTranscript: payload,
         isEditing: false,
       };
+    case 'FORM/RESET':
+      return initialState;
     default:
       return state;
   }
