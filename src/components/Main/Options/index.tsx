@@ -1,10 +1,9 @@
-import { useState, useRef, ChangeEvent } from 'react';
+import { useState, useRef } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import DropDownOptions from './DropDownOptions';
 import OptionsInput from './Input';
 import { DropDownSVG } from './Svg';
 import useOnClickOutside from '@hooks/useOnClickOutside';
-import { formValuesProps } from '@@types/form';
 
 type Options = { [key: string]: string };
 type InterviewOptionsProps = {
@@ -14,16 +13,11 @@ type InterviewOptionsProps = {
     name: string;
     options?: Options;
   };
-  formValues: formValuesProps;
-  handleChange: (e: ChangeEvent<HTMLInputElement>) => void;
 };
 
-const InterviewOptions = ({
-  option,
-  formValues,
-  handleChange,
-}: InterviewOptionsProps) => {
+const InterviewOptions = ({ option }: InterviewOptionsProps) => {
   const { label, type, name, options } = option;
+
   const [isDropDownOpen, setIsDropDownOpen] = useState(false);
   const optionRef = useRef(null);
   const [queryOptions] = useSearchParams();
@@ -60,13 +54,7 @@ const InterviewOptions = ({
           )}
         </>
       )}
-      {type === 'input' && (
-        <OptionsInput
-          name={name}
-          formValues={formValues}
-          handleChange={handleChange}
-        />
-      )}
+      {type === 'input' && <OptionsInput name={name} />}
     </div>
   );
 };

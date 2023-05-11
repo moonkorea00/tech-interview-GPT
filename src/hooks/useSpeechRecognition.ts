@@ -1,11 +1,13 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useState, useEffect, Dispatch } from 'react';
+import { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { Action } from '@@types/form';
+import { useFormDispatch } from './useFormContext';
 
-const useSpeechRecognition = (dispatch: Dispatch<Action>) => {
+const useSpeechRecognition = () => {
   const [isRecording, setIsRecording] = useState(false);
   const [searchParams] = useSearchParams();
+
+  const dispatch = useFormDispatch();
 
   const SpeechRecognition =
     window.SpeechRecognition || window.webkitSpeechRecognition;

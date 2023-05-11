@@ -1,27 +1,25 @@
-import { useState, ChangeEvent } from 'react';
+import { useState } from 'react';
 import eyeVisible from '@assets/Main/eye-visible.svg';
 import eyeHidden from '@assets/Main/eye-hidden.svg';
-import { formValuesProps } from '@@types/form';
+import { useFormSelector } from '@hooks/useFormContext';
+import useForm from '@hooks/useForm';
 
 type OptionsInputProps = {
   name: string;
-  formValues: formValuesProps;
-  handleChange: (e: ChangeEvent<HTMLInputElement>) => void;
 };
 
-const OptionsInput = ({
-  name,
-  formValues,
-  handleChange,
-}: OptionsInputProps) => {
+const OptionsInput = ({ name }: OptionsInputProps) => {
   const [isInputTypePassword, setIsInputTypePassword] = useState(true);
+
+  const formValues = useFormSelector();
+  const { handleChange } = useForm();
 
   return (
     <div className="relative">
       <input
         type={isInputTypePassword ? 'password' : 'text'}
         name={name}
-        value={formValues[name as keyof typeof formValues]}
+        value={formValues[name as keyof typeof formValues] as string}
         onChange={handleChange}
         className=" w-full rounded-md bg-white py-1.5 pl-3 pr-10 text-left shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-2 focus:ring-secondary sm:text-sm sm:leading-6"
       />

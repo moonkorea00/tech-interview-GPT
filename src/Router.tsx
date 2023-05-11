@@ -4,6 +4,7 @@ import {
   createRoutesFromElements,
   Route,
 } from 'react-router-dom';
+import { FormProvider } from '@store/FormContext';
 import RootLayout from './components/common/Layout';
 import Main from './components/Main';
 
@@ -16,7 +17,11 @@ const Router = () => {
     )
   );
 
-  return <RouterProvider router={router} />;
+  return (
+    <FormProvider>
+      <RouterProvider router={router} />
+    </FormProvider>
+  );
 };
 
 export default Router;

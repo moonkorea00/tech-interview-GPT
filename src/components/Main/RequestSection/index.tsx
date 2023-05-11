@@ -1,38 +1,25 @@
-import { ChangeEvent } from 'react';
 import RequestInput from './RequestInput';
 import { PrimaryButton, SecondaryButton } from '@components/common/Button';
 import user from '@assets/Main/user.svg';
-import { State } from '@@types/form';
+import { useFormSelector } from '@hooks/useFormContext';
+import useForm from '@hooks/useForm';
+import useSpeechRecognition from '@hooks/useSpeechRecognition';
+import useGetQuestion from '@hooks/useGetQuestion';
 
-type RequestSectionProps = {
-  formValues: State;
-  handleChange: (e: ChangeEvent<HTMLTextAreaElement>) => void;
-  handleValidateForm: () => void;
-  handleSubmitForm: () => Promise<void>;
-  isRecording: boolean;
-  startSpeechRecognition: () => void;
-  stopSpeechRecognition: () => void;
-  handleGetQuestion: () => void;
-  handleEditMode: () => void;
-  handleSaveEdit: () => void;
-  handleCancelEdit: () => void;
-};
-
-const RequestSection = ({
-  formValues,
-  handleChange,
-  handleValidateForm,
-  handleSubmitForm,
-  isRecording,
-  startSpeechRecognition,
-  stopSpeechRecognition,
-  handleGetQuestion,
-  handleEditMode,
-  handleSaveEdit,
-  handleCancelEdit,
-}: RequestSectionProps) => {
+const RequestSection = () => {
   const { transcript, editedTranscript, isValid, isEditing, isLoading } =
-    formValues;
+    useFormSelector();
+  const {
+    handleChange,
+    handleValidateForm,
+    handleSubmitForm,
+    handleEditMode,
+    handleSaveEdit,
+    handleCancelEdit,
+  } = useForm();
+  const { isRecording, startSpeechRecognition, stopSpeechRecognition } =
+    useSpeechRecognition();
+  const { handleGetQuestion } = useGetQuestion(isValid);
 
   return (
     <div className="w-[950px]">

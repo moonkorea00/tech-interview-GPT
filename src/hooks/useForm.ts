@@ -1,13 +1,16 @@
-import { useReducer, useEffect, ChangeEvent } from 'react';
+import { useEffect, ChangeEvent } from 'react';
 import { useSearchParams, useLocation } from 'react-router-dom';
 import { AxiosError } from 'axios';
-import { initialState, formReducer } from '@reducer/formReducer';
+import { useFormSelector, useFormDispatch } from './useFormContext';
+import { validateRequestOptions as onValidate } from '@utils/validateRequestOptions';
 import fetchOpenAiCompletion from '@api/openAI';
 
-const useForm = (onValidate: VoidFunction) => {
-  const [formValues, dispatch] = useReducer(formReducer, initialState);
-  const [searchParams] = useSearchParams();
+const useForm = () => {
   const { search } = useLocation();
+  const [searchParams] = useSearchParams();
+
+  const formValues = useFormSelector();
+  const dispatch = useFormDispatch();
 
   const { apiKey, transcript, editedTranscript } = formValues;
 
@@ -20,7 +23,7 @@ const useForm = (onValidate: VoidFunction) => {
 
   const handleValidateForm = () => {
     try {
-      onValidate();
+      onValidate(searchParams);
       dispatch({ type: 'FORM/VALIDATION_SUCCESS' });
     } catch (err) {
       if (err instanceof Error) {
@@ -63,7 +66,6 @@ const useForm = (onValidate: VoidFunction) => {
 
   return {
     formValues,
-    dispatch,
     handleChange,
     handleValidateForm,
     handleSubmitForm,

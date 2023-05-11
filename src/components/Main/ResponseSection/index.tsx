@@ -1,14 +1,10 @@
 import useTypingEffect from '@hooks/useTypingEffect';
 import { FlickerSVG } from '../Options/Svg';
 import ChatGPT from '@assets/Main/ChatGPT.svg';
-import { State } from '@@types/form';
+import { useFormSelector } from '@hooks/useFormContext';
 
-type ResponseSectionProps = {
-  formValues: State;
-};
-
-const ResponseSection = ({ formValues }: ResponseSectionProps) => {
-  const { modelResponse, isLoading } = formValues;
+const ResponseSection = () => {
+  const { modelResponse, isLoading } = useFormSelector();
   const { text: modelMessage, isAnimating } = useTypingEffect(modelResponse);
 
   return (

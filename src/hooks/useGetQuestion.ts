@@ -1,11 +1,13 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useEffect, Dispatch } from 'react';
+import { useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
+import { useFormDispatch } from './useFormContext';
 import { questions } from '@utils/questions';
-import { Action } from '@@types/form';
 
-const useGetQuestion = (dispatch: Dispatch<Action>, condition: boolean) => {
+const useGetQuestion = (condition: boolean) => {
   const [searchParams] = useSearchParams();
+
+  const dispatch = useFormDispatch();
 
   const field = searchParams.get('field');
   const questionsArr = questions[field as keyof typeof questions];
@@ -17,7 +19,7 @@ const useGetQuestion = (dispatch: Dispatch<Action>, condition: boolean) => {
   };
 
   useEffect(() => {
-    if (!condition) return;
+    if (!condition || !questionsArr) return;
     handleGetQuestion(questionsArr);
   }, [condition]);
 
