@@ -1,10 +1,7 @@
-import { createContext, useReducer, ReactNode, Dispatch } from 'react';
+import { createContext, useReducer, Dispatch } from 'react';
 import { formReducer, initialState } from '@reducer/formReducer';
 import { Action, State } from '@@types/form';
-
-type ContextProviderProps = {
-  children: ReactNode;
-};
+import { ContextProviderProps } from './store.types';
 
 export const FormContext = createContext<State | null>(null);
 export const DispatchContext = createContext<Dispatch<Action> | null>(null);
