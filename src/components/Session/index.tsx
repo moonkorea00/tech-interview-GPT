@@ -25,7 +25,7 @@ const Session = () => {
   return (
     <main className="flex flex-col items-center gap-20 w-[950px]">
       <div className="flex flex-col items-center w-full">
-        <DialogueInput src={user} transcript={session?.question as string} />
+        <DialogueInput src={user} transcript={session?.transcript as string} />
         <PrimaryButton onClickHandler={session ? onRetry : () => navigate('/')}>
           {session ? 'Try question again' : 'Start new interview'}
         </PrimaryButton>
@@ -34,7 +34,7 @@ const Session = () => {
         src={chatGPT}
         transcript={
           session
-            ? (session?.response as string)
+            ? `Quesiton: \n\n ${session.question} \n\n Repsonse: \n\n ${(session.response)}`
             : `Couldn't find your session history. Try Starting a new Interview.`
         }
       />
