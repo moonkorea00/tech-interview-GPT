@@ -34,7 +34,7 @@ const Session = () => {
         src={chatGPT}
         transcript={
           session
-            ? `Quesiton: \n\n ${session.question} \n\n Repsonse: \n\n ${(session.response)}`
+            ? `Question: \n\n ${session.question} \n\n Response: \n\n ${(session.response)}`
             : `Couldn't find your session history. Try Starting a new Interview.`
         }
       />
