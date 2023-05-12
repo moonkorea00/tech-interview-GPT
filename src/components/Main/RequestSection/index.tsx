@@ -1,13 +1,13 @@
-import RequestInput from './RequestInput';
+import DialogueInput from '@components/common/DialogueInput';
 import { PrimaryButton, SecondaryButton } from '@components/common/Button';
-import user from '@assets/Main/user.svg';
+import src from '@assets/Main/user.svg';
 import { useFormSelector } from '@hooks/useFormContext';
 import useForm from '@hooks/useForm';
-import useSpeechRecognition from '@hooks/useSpeechRecognition';
-import useGetQuestion from '@hooks/useGetQuestion';
+import useSpeechRecognition from '../hooks/useSpeechRecognition';
+import useGetQuestion from '@components/Main/hooks/useGetQuestion';
 
 const RequestSection = () => {
-  const { transcript, editedTranscript, isValid, isEditing, isLoading } =
+  const { transcript, editedTranscript, isValid, isEditing, isLoading, isRetry } =
     useFormSelector();
   const {
     handleChange,
@@ -19,21 +19,19 @@ const RequestSection = () => {
   } = useForm();
   const { isRecording, startSpeechRecognition, stopSpeechRecognition } =
     useSpeechRecognition();
-  const { handleGetQuestion } = useGetQuestion(isValid);
+  const { handleGetQuestion } = useGetQuestion(!isRetry  && isValid);
 
   return (
     <div className="w-[950px]">
-      <div className="flex w-full">
-        <img src={user} alt="user" className="w-[50px] mr-4 self-start" />
-        <RequestInput
-          {...{
-            transcript,
-            isEditing,
-            editedTranscript,
-            handleChange,
-          }}
-        />
-      </div>
+      <DialogueInput
+        {...{
+          src,
+          transcript,
+          isEditing,
+          editedTranscript,
+          handleChange,
+        }}
+      />
       <div className="flex justify-center items-center gap-3 relative">
         {isValid ? (
           <>
