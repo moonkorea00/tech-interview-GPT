@@ -27,7 +27,7 @@ const DialogueInput = ({
           autoFocus
         />
       ) : (
-        <div className="flex flex-col justify-center w-full min-h-[50px] p-4 mb-8 border border-black/10 leading-6 rounded-md shadow-sectionInput">
+        <div className="flex flex-col justify-center w-full min-h-[50px] p-4 mb-8 border border-black/10 leading-6 rounded-md whitespace-pre-line shadow-sectionInput">
           <p>{transcript}</p>
         </div>
       )}
