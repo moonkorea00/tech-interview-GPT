@@ -7,9 +7,10 @@ export interface Session {
 }
 
 export interface SessionContext {
+  session?: Session;
   sessions: Session[];
   readSessions: (initialValue?: never[]) => Session[] | [];
   saveSession: (session: Session) => void;
   deleteSession: (id: string) => void;
-  retake: () => void;
+  readSessionById: (id: string) => void;
 }

@@ -60,6 +60,10 @@ const useForm = () => {
     dispatch({ type: 'FORM/EDIT_CANCEL', payload: transcript });
   };
 
+  const handleRetryQuestion = (question: string) => {
+    dispatch({ type: 'FORM/RETRY_QUESTION', payload: question });
+  };
+
   useEffect(() => {
     if (!search) dispatch({ type: 'FORM/RESET' });
   }, [search]);
@@ -72,6 +76,7 @@ const useForm = () => {
     handleEditMode,
     handleSaveEdit,
     handleCancelEdit,
+    handleRetryQuestion,
   };
 };
 

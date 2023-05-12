@@ -10,6 +10,7 @@ export interface State extends formValuesProps {
   modelResponse: string;
   isValid: boolean;
   isEditing: boolean;
+  isRetry: boolean;
 }
 
 export type Action =
@@ -28,4 +29,5 @@ export type Action =
   | { type: 'FORM/EDIT_START'; payload: string }
   | { type: 'FORM/EDIT_SAVE'; payload: string }
   | { type: 'FORM/EDIT_CANCEL'; payload: string }
-  | { type: 'FORM/RESET'; payload?: never };
+  | { type: 'FORM/RESET'; payload?: never }
+  | { type: 'FORM/RETRY_QUESTION'; payload: string };

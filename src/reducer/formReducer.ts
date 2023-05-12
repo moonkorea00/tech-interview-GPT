@@ -11,6 +11,7 @@ export const initialState = {
   modelResponse: initialResponse,
   isValid: false,
   isEditing: false,
+  isRetry: false,
 };
 
 export const formReducer: Reducer<State, Action> = (
@@ -47,6 +48,7 @@ export const formReducer: Reducer<State, Action> = (
         transcript: '',
         editedTranscript: '',
         modelResponse: payload,
+        isRetry: false,
       };
     case 'FORM/EDIT_START':
       return { ...state, editedTranscript: payload, isEditing: true };
@@ -64,6 +66,8 @@ export const formReducer: Reducer<State, Action> = (
       };
     case 'FORM/RESET':
       return initialState;
+    case 'FORM/RETRY_QUESTION':
+      return { ...state, modelResponse: payload, isValid: true, isRetry: true };
     default:
       return state;
   }

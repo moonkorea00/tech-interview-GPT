@@ -10,6 +10,8 @@ export const InterviewSessionProvider = ({
   children,
 }: ContextProviderProps) => {
   const [sessions, setSessions] = useState<Session[]>([]);
+  const [session, setSession] = useState<Session>();
+
   const itemKey = 'interview_sessions';
 
   const readSessions = (initialValue = []): Session[] | [] => {
@@ -47,9 +49,9 @@ export const InterviewSessionProvider = ({
     setSessions(newSessions);
   };
 
-  const retakeSession = (search: string, question: string) => {
-    // navigate(`/${search}`);
-    // handleSetQuestion(question)
+  const readSessionById = (id: string) => {
+    const session = sessions.find(session => session.id === id);
+    setSession(session);
   };
 
   useEffect(() => setSessions(readSessions()), []);
@@ -57,11 +59,12 @@ export const InterviewSessionProvider = ({
   return (
     <InterviewSessionContext.Provider
       value={{
+        session,
         sessions,
         readSessions,
         saveSession,
         deleteSession,
-        retakeSession,
+        readSessionById,
       }}
     >
       {children}
