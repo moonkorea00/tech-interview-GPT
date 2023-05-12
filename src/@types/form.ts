@@ -1,4 +1,4 @@
-export interface formValues {
+export interface FormValues {
   apiKey: string;
   question: string;
   transcript: string;
@@ -6,7 +6,7 @@ export interface formValues {
 }
 
 export interface State {
-  formValues: formValues,
+  formValues: FormValues,
   modelResponse: string;
   isLoading: boolean;
   isValid: boolean;
