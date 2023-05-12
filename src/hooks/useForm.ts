@@ -41,7 +41,6 @@ const useForm = () => {
       dispatch({ type: 'API/FETCH_START' });
       const { id, choices } = await fetchOpenAiCompletion({ searchParams, apiKey, question, transcript });
       dispatch({ type: 'API/FETCH_SUCCESS', payload: choices[0].text.trim() });
-      console.log(id, choices)
       saveSession({ id, question, transcript, search, response: choices[0].text.trim() });
     } catch (err) {
       if (err instanceof AxiosError) {
