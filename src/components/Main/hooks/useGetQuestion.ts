@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { useFormDispatch } from './useFormContext';
+import { useFormDispatch } from '../../../hooks/useFormContext';
 import { questions } from '@utils/questions';
 
 const useGetQuestion = (condition: boolean) => {
