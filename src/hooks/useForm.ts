@@ -2,6 +2,7 @@ import { useEffect, ChangeEvent } from 'react';
 import { useSearchParams, useLocation } from 'react-router-dom';
 import { AxiosError } from 'axios';
 import { useFormSelector, useFormDispatch } from './useFormContext';
+import { useInterviewSessionSelector } from './useInterviewSessionContext';
 import { validateRequestOptions as onValidate } from '@utils/validateRequestOptions';
 import fetchOpenAiCompletion from '@api/openAI';
 
@@ -11,6 +12,7 @@ const useForm = () => {
 
   const formState = useFormSelector();
   const dispatch = useFormDispatch();
+  const { saveSession } = useInterviewSessionSelector()
 
   const { formValues : { apiKey, question, transcript, editedTranscript } } = formState;
 
@@ -31,14 +33,16 @@ const useForm = () => {
       }
     }
   };
-
+  
   const handleSubmitForm = async () => {
     try {
       if (!apiKey) throw new AxiosError('Please provide your OpenAI API Key.');
       handleValidateForm();
       dispatch({ type: 'API/FETCH_START' });
-      const res = await fetchOpenAiCompletion({searchParams, apiKey, question, transcript});
-      dispatch({ type: 'API/FETCH_SUCCESS', payload: res });
+      const { id, choices } = await fetchOpenAiCompletion({ searchParams, apiKey, question, transcript });
+      dispatch({ type: 'API/FETCH_SUCCESS', payload: choices[0].text.trim() });
+      console.log(id, choices)
+      saveSession({ id, question, transcript, search, response: choices[0].text.trim() });
     } catch (err) {
       if (err instanceof AxiosError) {
         dispatch({ type: 'API/FETCH_FAIL', payload: err.message });
