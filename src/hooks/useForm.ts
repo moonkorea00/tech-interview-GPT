@@ -9,10 +9,10 @@ const useForm = () => {
   const { search } = useLocation();
   const [searchParams] = useSearchParams();
 
-  const formValues = useFormSelector();
+  const formState = useFormSelector();
   const dispatch = useFormDispatch();
 
-  const { apiKey, transcript, editedTranscript } = formValues;
+  const { formValues : { apiKey, question, transcript, editedTranscript } } = formState;
 
   const handleChange = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -37,7 +37,7 @@ const useForm = () => {
       if (!apiKey) throw new AxiosError('Please provide your OpenAI API Key.');
       handleValidateForm();
       dispatch({ type: 'API/FETCH_START' });
-      const res = await fetchOpenAiCompletion(searchParams, formValues);
+      const res = await fetchOpenAiCompletion({searchParams, apiKey, question, transcript});
       dispatch({ type: 'API/FETCH_SUCCESS', payload: res });
     } catch (err) {
       if (err instanceof AxiosError) {
@@ -69,7 +69,7 @@ const useForm = () => {
   }, [search]);
 
   return {
-    formValues,
+    formState,
     handleChange,
     handleValidateForm,
     handleSubmitForm,

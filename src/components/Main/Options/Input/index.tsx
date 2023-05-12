@@ -11,7 +11,7 @@ type OptionsInputProps = {
 const OptionsInput = ({ name }: OptionsInputProps) => {
   const [isInputTypePassword, setIsInputTypePassword] = useState(true);
 
-  const formValues = useFormSelector();
+  const { formValues } = useFormSelector();
   const { handleChange } = useForm();
 
   return (

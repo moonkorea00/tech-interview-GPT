@@ -7,8 +7,13 @@ import useSpeechRecognition from '../hooks/useSpeechRecognition';
 import useGetQuestion from '@components/Main/hooks/useGetQuestion';
 
 const RequestSection = () => {
-  const { transcript, editedTranscript, isValid, isEditing, isLoading, isRetry } =
-    useFormSelector();
+  const {
+    formValues: { transcript, editedTranscript },
+    isValid,
+    isEditing,
+    isLoading,
+    isRetry,
+  } = useFormSelector();
   const {
     handleChange,
     handleValidateForm,
@@ -19,7 +24,7 @@ const RequestSection = () => {
   } = useForm();
   const { isRecording, startSpeechRecognition, stopSpeechRecognition } =
     useSpeechRecognition();
-  const { handleGetQuestion } = useGetQuestion(!isRetry  && isValid);
+  const { handleGetQuestion } = useGetQuestion(!isRetry && isValid);
 
   return (
     <div className="w-[950px]">

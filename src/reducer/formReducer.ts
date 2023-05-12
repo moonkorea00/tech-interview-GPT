@@ -3,12 +3,14 @@ import { initialResponse } from '@utils/form';
 import { State, Action } from '@@types/form';
 
 export const initialState = {
-  apiKey: '',
-  question: '',
-  transcript: '',
-  editedTranscript: '',
-  isLoading: false,
+  formValues: {
+    apiKey: '',
+    question: '',
+    transcript: '',
+    editedTranscript: '',
+  },
   modelResponse: initialResponse,
+  isLoading: false,
   isValid: false,
   isEditing: false,
   isRetry: false,
@@ -34,34 +36,56 @@ export const formReducer: Reducer<State, Action> = (
     case 'FORM/UPDATE_FIELD':
       return {
         ...state,
-        [payload.name]: payload.value,
+        formValues: {
+          ...state.formValues,
+          [payload.name]: payload.value,
+        },
       };
     case 'FORM/UPDATE_TRANSCRIPT':
       return {
         ...state,
-        transcript: payload,
+        formValues: {
+          ...state.formValues,
+          transcript: payload,
+        },
       };
     case 'FORM/GET_QUESTION':
       return {
         ...state,
-        question: payload,
-        transcript: '',
-        editedTranscript: '',
+        formValues: {
+          ...state.formValues,
+          question: payload,
+          transcript: '',
+          editedTranscript: '',
+        },
         modelResponse: payload,
         isRetry: false,
       };
     case 'FORM/EDIT_START':
-      return { ...state, editedTranscript: payload, isEditing: true };
+      return {
+        ...state,
+        formValues: {
+          ...state.formValues,
+          editedTranscript: payload,
+        },
+        isEditing: true,
+      };
     case 'FORM/EDIT_SAVE':
       return {
         ...state,
-        transcript: payload,
+        formValues: {
+          ...state.formValues,
+          transcript: payload,
+        },
         isEditing: false,
       };
     case 'FORM/EDIT_CANCEL':
       return {
         ...state,
-        editedTranscript: payload,
+        formValues: {
+          ...state.formValues,
+          editedTranscript: payload,
+        },
         isEditing: false,
       };
     case 'FORM/RESET':
