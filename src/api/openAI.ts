@@ -1,12 +1,17 @@
 import instance from '@api';
 import { mapSearchParamToValue, generatePrompt } from '@utils/api';
-import { formValuesProps } from '@@types/form';
+import { formValues } from '@@types/form';
 
-const fetchOpenAICompletion = async (
-  searchParams: URLSearchParams,
-  formValues: formValuesProps
-) => {
-  const { apiKey, transcript, question } = formValues;
+interface CompletionApiProps extends formValues {
+  searchParams: URLSearchParams;
+}
+
+const fetchOpenAICompletion = async ({
+  searchParams,
+  apiKey,
+  question,
+  transcript,
+}: CompletionApiProps) => {
   const { field, experience, lang } = mapSearchParamToValue(searchParams);
 
   const prompt = generatePrompt(field, experience, lang, question, transcript);

@@ -1,13 +1,14 @@
-export interface formValuesProps {
+export interface formValues {
   apiKey: string;
   question: string;
   transcript: string;
   editedTranscript: string;
 }
 
-export interface State extends formValuesProps {
-  isLoading: boolean;
+export interface State {
+  formValues: formValues,
   modelResponse: string;
+  isLoading: boolean;
   isValid: boolean;
   isEditing: boolean;
   isRetry: boolean;
