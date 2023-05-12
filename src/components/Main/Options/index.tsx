@@ -3,7 +3,7 @@ import { useSearchParams } from 'react-router-dom';
 import DropDownOptions from './DropDownOptions';
 import OptionsInput from './Input';
 import { DropDownSVG } from './Svg';
-import useOnClickOutside from '../hooks/useOnClickOutside';
+import useOnClickOutside from '@hooks/useOnClickOutside';
 
 type Options = { [key: string]: string };
 type InterviewOptionsProps = {
