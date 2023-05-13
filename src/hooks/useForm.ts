@@ -3,8 +3,8 @@ import { useSearchParams, useLocation } from 'react-router-dom';
 import { AxiosError } from 'axios';
 import { useFormSelector, useFormDispatch } from './useFormContext';
 import { useInterviewSessionSelector } from './useInterviewSessionContext';
-import { validateRequestOptions as onValidate } from '@utils/validateRequestOptions';
-import fetchOpenAiCompletion from '@api/openAI';
+import { validateRequestOptions as onValidate } from '@utils/validation/validateRequestOptions';
+import fetchOpenAiCompletion from '@api/completion/openAI';
 
 const useForm = () => {
   const { search } = useLocation();
