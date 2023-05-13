@@ -1,5 +1,5 @@
 import DialogueInput from '@components/common/DialogueInput';
-import { PrimaryButton, SecondaryButton } from '@components/common/Button';
+import ActionButton from '@components/common/Button';
 import src from '@assets/Main/user.svg';
 import { useFormSelector } from '@hooks/useFormContext';
 import useForm from '@hooks/useForm';
@@ -40,7 +40,7 @@ const RequestSection = () => {
       <div className="flex justify-center items-center gap-3 relative">
         {isValid ? (
           <>
-            <PrimaryButton
+            <ActionButton
               onClickHandler={
                 transcript && !isRecording
                   ? handleSubmitForm
@@ -48,6 +48,7 @@ const RequestSection = () => {
                   ? stopSpeechRecognition
                   : startSpeechRecognition
               }
+              variant="primary"
               disabled={isLoading || isEditing}
               className={`${isRecording ? 'animate-fade-in-out' : ''} `}
             >
@@ -56,30 +57,35 @@ const RequestSection = () => {
                 : isRecording
                 ? 'Stop Recoding'
                 : 'Start Recording Answer'}
-            </PrimaryButton>
-            <SecondaryButton
+            </ActionButton>
+            <ActionButton
               onClickHandler={isEditing ? handleSaveEdit : handleEditMode}
+              variant="secondary"
               disabled={isRecording}
             >
               {isEditing ? 'Save' : 'Edit'}
-            </SecondaryButton>
+            </ActionButton>
             {isEditing && (
-              <SecondaryButton onClickHandler={handleCancelEdit}>
+              <ActionButton
+                onClickHandler={handleCancelEdit}
+                variant="secondary"
+              >
                 Cancel
-              </SecondaryButton>
+              </ActionButton>
             )}
-            <SecondaryButton
+            <ActionButton
               onClickHandler={handleGetQuestion}
+              variant="secondary"
               disabled={isRecording || isEditing}
               className="absolute right-0"
             >
               Change question
-            </SecondaryButton>
+            </ActionButton>
           </>
         ) : (
-          <PrimaryButton onClickHandler={handleValidateForm}>
+          <ActionButton onClickHandler={handleValidateForm} variant="primary">
             Start Interview
-          </PrimaryButton>
+          </ActionButton>
         )}
       </div>
     </div>
