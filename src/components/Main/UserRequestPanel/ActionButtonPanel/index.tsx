@@ -1,5 +1,5 @@
 import ActionButton from '@components/common/Button';
-import useFormButtonConfig from '../hooks/useFormButtonConfig';
+import useFormButtonConfig from '@components/Main/hooks/useFormButtonConfig';
 
 const ActionButtonPanel = () => {
   const { formButtonsConfig } = useFormButtonConfig();

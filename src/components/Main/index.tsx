@@ -1,13 +1,13 @@
-import InterviewOptions from './Options';
+import InterviewOptions from './InterviewOptionsPanel';
 import ResponseSection from './ModelResponsePanel';
 import UserRequestPanel from './UserRequestPanel';
-import { OPTIONS_DATA } from './Options/constants';
+import { INTERVIEW_OPTIONS } from './constants';
 
 const Main = () => {
   return (
     <main className="flex flex-col items-center gap-12">
       <div className="flex">
-        {OPTIONS_DATA.map(option => (
+        {INTERVIEW_OPTIONS.map(option => (
           <InterviewOptions key={option.id} option={option} />
         ))}
       </div>
