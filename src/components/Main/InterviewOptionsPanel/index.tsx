@@ -1,35 +1,13 @@
-import { useState, useRef } from 'react';
-import OptionsDropdown from './Dropdown';
-import OptionsInput from './Input';
-import useOnClickOutside from '@hooks/useOnClickOutside';
-import { DropdownOptionsProps } from './Dropdown/types';
+import InterviewOption from './InterviewOption';
+import { INTERVIEW_OPTIONS } from '../constants';
 
-type InterviewOptionsPanelProps = {
-  option: DropdownOptionsProps
-};
-
-const InterviewOptionsPanel = ({ option }: InterviewOptionsPanelProps) => {
-  const { label, type, name } = option;
-
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const optionRef = useRef(null);
-
-  useOnClickOutside(optionRef, () => setIsDropdownOpen(false));
-
+const InterviewOptionsPanel = () => {
   return (
-    <div className="relative w-[200px] mx-4" ref={optionRef}>
-      <label className="block text-sm font-medium leading-6">
-        {label} &#9432;
-      </label>
-      {type === 'dropdown' && (
-        <OptionsDropdown
-          option={option}
-          isDropdownOpen={isDropdownOpen}
-          setIsDropdownOpen={setIsDropdownOpen}
-        />
-      )}
-      {type === 'input' && <OptionsInput name={name} />}
-    </div>
+    <section className="flex">
+      {INTERVIEW_OPTIONS.map(option => (
+        <InterviewOption key={option.id} option={option} />
+      ))}
+    </section>
   );
 };
 

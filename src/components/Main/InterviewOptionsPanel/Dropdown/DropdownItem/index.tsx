@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction } from 'react';
-import { SelectSVG } from '../../Svg';
+import { SelectSVG } from '../Svg';
 import useURLSearchParams from '@components/Main/hooks/useURLSearchParams';
 
 type DropdownItemProps = {

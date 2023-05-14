@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction } from 'react';
-import { DropDownSVG } from '../../Svg';
+import { DropDownSVG } from '../Svg';
 
 type DropdownButtonProps ={
   selectedOption : string;
