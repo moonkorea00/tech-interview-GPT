@@ -1,13 +1,11 @@
-import { MouseEventHandler, ReactNode } from 'react';
-
-type ButtonVariant = 'primary' | 'secondary';
+import { MouseEventHandler } from 'react';
 
 type ActionButtonProps = {
   onClickHandler: MouseEventHandler<HTMLButtonElement>;
-  variant: ButtonVariant;
+  variant: string;
   className?: string;
   disabled?: boolean;
-  children: ReactNode;
+  label: string;
 };
 
 const ActionButton = ({
@@ -15,7 +13,7 @@ const ActionButton = ({
   variant,
   className,
   disabled = false,
-  children,
+  label,
 }: ActionButtonProps) => {
   const buttonClasses =
     variant === 'primary'
@@ -30,7 +28,7 @@ const ActionButton = ({
         disabled && 'cursor-not-allowed'
       } ${className}`}
     >
-      {children}
+      {label}
     </button>
   );
 };
