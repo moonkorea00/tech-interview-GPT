@@ -21,7 +21,7 @@ export const options: Options = {
   },
 };
 
-export const OPTIONS_DATA = [
+export const INTERVIEW_OPTIONS = [
   {
     id: 1,
     label: 'Development Field',
