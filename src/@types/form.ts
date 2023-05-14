@@ -1,3 +1,5 @@
+import { MouseEventHandler } from "react";
+
 export interface FormValues {
   apiKey: string;
   question: string;
@@ -6,7 +8,7 @@ export interface FormValues {
 }
 
 export interface State {
-  formValues: FormValues,
+  formValues: FormValues;
   modelResponse: string;
   isLoading: boolean;
   isValid: boolean;
@@ -32,3 +34,11 @@ export type Action =
   | { type: 'FORM/EDIT_CANCEL'; payload: string }
   | { type: 'FORM/RESET'; payload?: never }
   | { type: 'FORM/RETRY_QUESTION'; payload: string };
+
+export type ActionButtonProps = {
+  onClickHandler: MouseEventHandler<HTMLButtonElement>;
+  variant: string;
+  label: string;
+  className?: string;
+  disabled?: boolean;
+};

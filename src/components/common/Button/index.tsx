@@ -1,19 +1,11 @@
-import { MouseEventHandler } from 'react';
-
-type ActionButtonProps = {
-  onClickHandler: MouseEventHandler<HTMLButtonElement>;
-  variant: string;
-  className?: string;
-  disabled?: boolean;
-  label: string;
-};
+import { ActionButtonProps } from '@@types/form';
 
 const ActionButton = ({
   onClickHandler,
   variant,
+  label,
   className,
   disabled = false,
-  label,
 }: ActionButtonProps) => {
   const buttonClasses =
     variant === 'primary'
@@ -23,10 +15,10 @@ const ActionButton = ({
   return (
     <button
       onClick={onClickHandler}
-      disabled={disabled}
       className={`rounded-xl px-3 py-1.5 text-sm font-semibold ${buttonClasses} ${
         disabled && 'cursor-not-allowed'
       } ${className}`}
+      disabled={disabled}
     >
       {label}
     </button>
