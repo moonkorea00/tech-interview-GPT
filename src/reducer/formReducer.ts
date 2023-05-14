@@ -1,6 +1,8 @@
 import { Reducer } from 'react';
-import { initialResponse } from '@utils/form';
 import { State, Action } from '@@types/form';
+
+const initialResponse =
+  'Before we start, tell me more about yourself by filling out the options above. Your OpenAI key wont be required until you submit your answer so feel free to start the interview!';
 
 export const initialState = {
   formValues: {

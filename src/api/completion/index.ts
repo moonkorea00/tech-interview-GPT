@@ -1,5 +1,5 @@
 import instance from '@api';
-import { mapSearchParamToValue, generatePrompt } from '@utils/api';
+import { mapSearchParamToValue, generatePrompt } from '../api.utils';
 import { FormValues } from '@@types/form';
 
 interface CompletionApiProps extends Omit<FormValues, 'editedTranscript'> {

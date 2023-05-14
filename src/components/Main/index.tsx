@@ -1,6 +1,6 @@
 import InterviewOptions from './Options';
-import ResponseSection from './ResponseSection';
-import RequestSection from './RequestSection';
+import ResponseSection from './ModelResponsePanel';
+import UserRequestPanel from './UserRequestPanel';
 import { OPTIONS_DATA } from './Options/constants';
 
 const Main = () => {
@@ -12,7 +12,7 @@ const Main = () => {
         ))}
       </div>
       <div className="flex flex-col gap-20">
-        <RequestSection />
+        <UserRequestPanel />
         <ResponseSection />
       </div>
     </main>

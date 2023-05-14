@@ -1,46 +1,28 @@
-import { MouseEventHandler, ReactNode } from 'react';
+import { ActionButtonProps } from '@@types/form';
 
-type ButtonProps = {
-  onClickHandler: MouseEventHandler<HTMLButtonElement>;
-  className?: string;
-  disabled?: boolean;
-  children: ReactNode;
-};
-
-export const PrimaryButton = ({
+const ActionButton = ({
   onClickHandler,
+  variant,
+  label,
   className,
   disabled = false,
-  children,
-}: ButtonProps) => {
+}: ActionButtonProps) => {
+  const buttonClasses =
+    variant === 'primary'
+      ? 'bg-primary text-white hover:bg-secondary'
+      : 'text-black border border-solid border-border-default hover:bg-secondary-hover';
+
   return (
     <button
       onClick={onClickHandler}
-      disabled={disabled}
-      className={`${
+      className={`rounded-xl px-3 py-1.5 text-sm font-semibold ${buttonClasses} ${
         disabled && 'cursor-not-allowed'
-      } rounded-xl bg-primary px-3 py-1.5 text-sm font-semibold text-white hover:bg-secondary ${className}`}
+      } ${className}`}
+      disabled={disabled}
     >
-      {children}
+      {label}
     </button>
   );
 };
 
-export const SecondaryButton = ({
-  onClickHandler,
-  className,
-  disabled = false,
-  children,
-}: ButtonProps) => {
-  return (
-    <button
-      onClick={onClickHandler}
-      disabled={disabled}
-      className={`${
-        disabled && 'cursor-not-allowed'
-      } rounded-xl px-3 py-1.5 text-sm font-semibold text-black border border-solid border-border-default hover:bg-secondary-hover ${className}`}
-    >
-      {children}
-    </button>
-  );
-};
+export default ActionButton;

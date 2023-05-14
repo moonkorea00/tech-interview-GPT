@@ -3,7 +3,7 @@ import ChatGPT from '@assets/Main/ChatGPT.svg';
 import useTypingEffect from '../hooks/useTypingEffect';
 import { useFormSelector } from '@hooks/useFormContext';
 
-const ResponseSection = () => {
+const ModelResponsePanel = () => {
   const { modelResponse, isLoading } = useFormSelector();
   const { text: modelMessage, isAnimating } = useTypingEffect(modelResponse);
 
@@ -20,4 +20,4 @@ const ResponseSection = () => {
   );
 };
 
-export default ResponseSection;
+export default ModelResponsePanel;

@@ -3,8 +3,8 @@ import { useSearchParams, useLocation } from 'react-router-dom';
 import { AxiosError } from 'axios';
 import { useFormSelector, useFormDispatch } from './useFormContext';
 import { useInterviewSessionSelector } from './useInterviewSessionContext';
-import { validateRequestOptions as onValidate } from '@utils/validateRequestOptions';
-import fetchOpenAiCompletion from '@api/openAI';
+import { validateRequestOptions as onValidate } from '@utils/validation/validateRequestOptions';
+import fetchOpenAiCompletion from '@api/completion/openAI';
 
 const useForm = () => {
   const { search } = useLocation();
@@ -41,7 +41,6 @@ const useForm = () => {
       dispatch({ type: 'API/FETCH_START' });
       const { id, choices } = await fetchOpenAiCompletion({ searchParams, apiKey, question, transcript });
       dispatch({ type: 'API/FETCH_SUCCESS', payload: choices[0].text.trim() });
-      console.log(id, choices)
       saveSession({ id, question, transcript, search, response: choices[0].text.trim() });
     } catch (err) {
       if (err instanceof AxiosError) {

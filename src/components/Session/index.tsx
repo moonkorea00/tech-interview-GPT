@@ -3,7 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import DialogueInput from '@components/common/DialogueInput';
 import user from '@assets/Main/user.svg';
 import chatGPT from '@assets/Main/ChatGPT.svg';
-import { PrimaryButton } from '@components/common/Button';
+import ActionButton from '@components/common/Button';
 import useForm from '@hooks/useForm';
 import { useInterviewSessionSelector } from '@hooks/useInterviewSessionContext';
 import { Session as SessionType } from '@@types/interviewSession';
@@ -26,15 +26,18 @@ const Session = () => {
     <main className="flex flex-col items-center gap-20 w-[950px]">
       <div className="flex flex-col items-center w-full">
         <DialogueInput src={user} transcript={session?.transcript as string} />
-        <PrimaryButton onClickHandler={session ? onRetry : () => navigate('/')}>
+        <ActionButton
+          onClickHandler={session ? onRetry : () => navigate('/')}
+          variant="primary"
+        >
           {session ? 'Try question again' : 'Start new interview'}
-        </PrimaryButton>
+        </ActionButton>
       </div>
       <DialogueInput
         src={chatGPT}
         transcript={
           session
-            ? `Quesiton: \n\n ${session.question} \n\n Repsonse: \n\n ${(session.response)}`
+            ? `Question: \n\n ${session.question} \n\n Response: \n\n ${session.response}`
             : `Couldn't find your session history. Try Starting a new Interview.`
         }
       />

@@ -1,5 +1,5 @@
 import { options } from '@components/Main/Options/constants';
-import { optionsErrMap } from './error';
+import { optionsErrMap } from '../error';
 
 export const validateRequestOptions = (searchParams: URLSearchParams) => {
   const errors: string[] = [];
