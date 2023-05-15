@@ -1,5 +1,5 @@
 import InterviewOption from './InterviewOption';
-import { INTERVIEW_OPTIONS } from '../constants';
+import { INTERVIEW_OPTIONS } from '../constants/InterviewOptions';
 
 const InterviewOptionsPanel = () => {
   return (

@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction } from 'react';
-import { DropDownSVG } from '../Svg';
+import Dropdown from '@assets/Main/dropdown.svg'
 
 type DropdownButtonProps ={
   selectedOption : string;
@@ -16,7 +16,7 @@ const DropdownButton = ({ selectedOption, setIsDropdownOpen }:DropdownButtonProp
         <span className="ml-3">{selectedOption || 'Select'}</span>
       </span>
       <span className="absolute inset-y-0 right-0 ml-3 flex items-center pr-2 pointer-events-none">
-        <DropDownSVG />
+      <img src={Dropdown} alt="select" className="h-3.5 w-3.5 text-gray-400" />
       </span>
     </button>
   );

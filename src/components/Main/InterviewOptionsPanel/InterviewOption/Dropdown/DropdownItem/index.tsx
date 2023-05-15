@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction } from 'react';
-import { SelectSVG } from '../Svg';
+import Select from '@assets/Main/select.svg';
 import useURLSearchParams from '@components/Main/hooks/useURLSearchParams';
 
 type DropdownItemProps = {
@@ -40,7 +40,9 @@ const DropdownItem = ({
           selectedOption === options[value] ? 'text-primary' : 'text-white'
         } absolute inset-y-0 right-0 flex items-center pr-4`}
       >
-        <SelectSVG />
+        {selectedOption === options[value] && (
+          <img src={Select} alt="select" className="h-7 w-7" />
+        )}
       </span>
     </li>
   );

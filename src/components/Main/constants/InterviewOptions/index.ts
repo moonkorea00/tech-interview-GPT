@@ -11,9 +11,16 @@ export const options = {
   },
   lang: {
     'en-US': 'English',
+    'ru-RU': 'Russian',
     'cmn-Hans-CN': '中文',
+    'hi-IN': 'Hindi',
+    'de-DE': 'Deutsch',
     'fr-FR': 'Français',
+    'es-AR': 'Español',
+    'pt-BR': 'Português(Brasil)',
+    'pt-PT': 'Português(Portugal)',
     'ko-KR': '한국어',
+    'ja-JP': '日本語',
   },
 };
 
@@ -43,7 +50,7 @@ export const INTERVIEW_OPTIONS = [
     type: 'dropdown',
     options: options.lang,
     tooltipContent:
-      'Select the spoken language when converting speech to text.',
+      'Select the spoken language when converting speech to text.\n\nYou may type in your answer with the edit option.',
   },
   {
     id: 4,
@@ -51,6 +58,6 @@ export const INTERVIEW_OPTIONS = [
     name: 'apiKey',
     type: 'input',
     tooltipContent:
-      'Click <a href="https://platform.openai.com/account/api-keys" target="_blank" rel="noreferrer" style="color:#9FA6FC">here</a> to get your API key.\n\nDont have an OpenAI account? <a href="https://platform.openai.com/signup" target="_blank" rel="noreferrer" style="color:#9FA6FC">Create</a> a new account and get free trial tokens.\n\n Your API key will only be required when submitting your interview answer so feel free to try out the interview first.',
+      'Click <a href="https://platform.openai.com/account/api-keys" target="_blank" rel="noreferrer" style="color:#9FA6FC">here</a> to get your API key.\n\nDont have an OpenAI account? <a href="https://platform.openai.com/signup" target="_blank" rel="noreferrer" style="color:#9FA6FC">Create</a> a new account and get free trial tokens.\n\nNOTE : Your API key will only be required when submitting your interview answer so feel free to try out the interview first.',
   },
 ];
