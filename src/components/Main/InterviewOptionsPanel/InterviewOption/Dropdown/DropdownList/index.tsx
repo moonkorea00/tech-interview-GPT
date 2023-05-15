@@ -17,7 +17,7 @@ const DropdownList = ({
 }: DropdownListProps) => {
 
   return (
-    <ul className="absolute mt-1 max-h-56 w-full rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm z-10">
+    <ul className="absolute mt-1 max-h-60 w-full rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm overflow-y-scroll scrollbar-hide z-10">
       {Object.keys(options).map(value => (
         <DropdownItem
           key={value}
