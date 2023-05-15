@@ -1,10 +1,11 @@
-import { options } from '@components/Main/Options/constants';
+import type { Options } from '@components/Main/constants/InterviewOptions';
+import { options } from '@components/Main/constants/InterviewOptions';
 
 export const mapSearchParamToValue = (searchParams: URLSearchParams) => {
   const searchParamValues: { [key: string]: string } = {};
 
   for (const [key, value] of searchParams) {
-    searchParamValues[key] = options[key][value];
+    searchParamValues[key] = options[key as keyof Options][value];
   }
 
   return searchParamValues;
