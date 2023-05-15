@@ -1,4 +1,4 @@
-import { FlickerSVG } from '../InterviewOptionsPanel/Svg';
+import { FlickerSVG } from '../InterviewOptionsPanel/InterviewOption/Dropdown/Svg';
 import ChatGPT from '@assets/Main/ChatGPT.svg';
 import useTypingEffect from '../hooks/useTypingEffect';
 import { useFormSelector } from '@hooks/useFormContext';
