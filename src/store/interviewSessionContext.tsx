@@ -1,6 +1,6 @@
+import type { Session, SessionContext } from '@@types/interviewSession';
+import type { ContextProviderProps } from './store.types';
 import { createContext, useState, useEffect } from 'react';
-import { ContextProviderProps } from './store.types';
-import { Session, SessionContext } from '@@types/interviewSession';
 
 export const InterviewSessionContext = createContext<SessionContext | null>(
   null
@@ -13,7 +13,7 @@ export const InterviewSessionProvider = ({
   const [session, setSession] = useState<Session>();
 
   const itemKey = 'interview_sessions';
-
+  
   const readSessions = (initialValue = []): Session[] | [] => {
     try {
       const sessions = localStorage.getItem(itemKey);

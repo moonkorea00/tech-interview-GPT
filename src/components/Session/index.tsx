@@ -1,3 +1,4 @@
+import type { Session as SessionType } from '@@types/interviewSession';
 import { useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import DialogueInput from '@components/common/DialogueInput';
@@ -6,7 +7,6 @@ import chatGPT from '@assets/Main/ChatGPT.svg';
 import ActionButton from '@components/common/Button';
 import useForm from '@hooks/useForm';
 import { useInterviewSessionSelector } from '@hooks/useInterviewSessionContext';
-import { Session as SessionType } from '@@types/interviewSession';
 
 const Session = () => {
   const { id } = useParams();

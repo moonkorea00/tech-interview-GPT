@@ -1,4 +1,5 @@
-import { useEffect, ChangeEvent } from 'react';
+import type { ChangeEvent } from 'react';
+import { useEffect } from 'react';
 import { useSearchParams, useLocation } from 'react-router-dom';
 import { AxiosError } from 'axios';
 import { useFormSelector, useFormDispatch } from './useFormContext';

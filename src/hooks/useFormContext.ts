@@ -1,6 +1,6 @@
+import type { State, Action } from '@@types/form';
 import { useContext } from 'react';
 import { FormContext, DispatchContext } from '@store/formContext';
-import { State, Action } from '@@types/form';
 
 export const useFormSelector = (): State => {
   const state = useContext(FormContext);

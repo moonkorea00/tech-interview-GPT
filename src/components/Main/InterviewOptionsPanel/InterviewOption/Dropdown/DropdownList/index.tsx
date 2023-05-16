@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction } from 'react';
+import type { Dispatch, SetStateAction } from 'react';
 import DropdownItem from '../DropdownItem';
 import { Options } from '../types';
 

@@ -1,8 +1,8 @@
+import type { ActionButtonProps } from '@@types/form';
 import useForm from '@hooks/useForm';
 import { useFormSelector } from '@hooks/useFormContext';
 import useSpeechRecognition from './useSpeechRecognition';
 import useGetQuestion from './useGetQuestion';
-import { ActionButtonProps } from '@@types/form';
 
 type FormButtonConfig = ActionButtonProps & {
   shouldRender: boolean;

@@ -1,22 +1,22 @@
-import { ChangeEvent } from 'react';
+import type { ChangeEvent } from 'react';
 
-type RequestInputProps = {
+type DialogueInputProps = {
   src: string;
   transcript: string;
-  isEditing?: boolean;
   editedTranscript?: string;
+  isEditing?: boolean;
   handleChange?: (e: ChangeEvent<HTMLTextAreaElement>) => void;
 };
 
 const DialogueInput = ({
   src,
-  isEditing,
   transcript,
   editedTranscript,
+  isEditing,
   handleChange,
-}: RequestInputProps) => {
+}: DialogueInputProps) => {
   return (
-    <section className="flex w-full">
+    <div className="flex w-full">
       <img src={src} alt="user" className="w-[50px] mr-4 self-start" />
       {isEditing ? (
         <textarea
@@ -31,7 +31,7 @@ const DialogueInput = ({
           <p>{transcript}</p>
         </div>
       )}
-    </section>
+    </div>
   );
 };
 
