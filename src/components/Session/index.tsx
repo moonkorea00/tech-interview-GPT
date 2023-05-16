@@ -29,9 +29,8 @@ const Session = () => {
         <ActionButton
           onClickHandler={session ? onRetry : () => navigate('/')}
           variant="primary"
-        >
-          {session ? 'Try question again' : 'Start new interview'}
-        </ActionButton>
+          label={session ? 'Try question again' : 'Start new interview'}
+        />
       </div>
       <DialogueInput
         src={chatGPT}

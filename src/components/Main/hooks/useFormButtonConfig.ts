@@ -14,7 +14,7 @@ const useFormButtonConfig = () => {
   const { isRecording, startSpeechRecognition, stopSpeechRecognition } = useSpeechRecognition();
   const { handleGetQuestion } = useGetQuestion(!isRetry && isValid);
 
-  const isFormReadyToSubmit = transcript && !isRecording;
+  const isFormReadyToSubmit = Boolean(transcript) && !isRecording;
 
   const startInterviewButton = {
     onClickHandler: handleValidateForm,
@@ -23,28 +23,28 @@ const useFormButtonConfig = () => {
     shouldRender: !isValid,
   };
 
-  const startAndRecordButton = {
-    onClickHandler: isFormReadyToSubmit
-      ? handleSubmitForm
-      : isRecording
-      ? stopSpeechRecognition
-      : startSpeechRecognition,
+  const submitButton = {
+    onClickHandler: handleSubmitForm,
     variant: 'primary',
-    label: isFormReadyToSubmit
-      ? 'Submit Answer'
-      : isRecording
-      ? 'Stop Recoding'
-      : 'Start Recording Answer',
+    label: 'Submit Answer',
+    disabled: isLoading || isEditing || !isFormReadyToSubmit,
+    shouldRender: isValid && isFormReadyToSubmit,
+  };
+
+  const recordButton = {
+    onClickHandler: isRecording ? stopSpeechRecognition : startSpeechRecognition,
+    variant: 'primary',
+    label: isRecording ? 'Stop Recording' : 'Start Recording Answer',
     className: isRecording ? 'animate-fade-in-out' : '',
-    disabled: isLoading || isEditing,
-    shouldRender: isValid,
+    disabled: isEditing || isFormReadyToSubmit,
+    shouldRender: isValid && !isFormReadyToSubmit,
   };
 
   const editButton = {
     onClickHandler: isEditing ? handleSaveEdit : handleEditMode,
     variant: 'secondary',
     label: isEditing ? 'Save' : 'Edit',
-    disabled: isRecording,
+    disabled: isRecording || isLoading,
     shouldRender: isValid,
   };
 
@@ -60,13 +60,14 @@ const useFormButtonConfig = () => {
     variant: 'secondary',
     label: 'Change question',
     className: 'absolute right-0',
-    disabled: isRecording || isEditing,
+    disabled: isRecording || isEditing || isLoading,
     shouldRender: isValid,
   };
 
   const formButtonsConfig: FormButtonConfig[] = [
     startInterviewButton,
-    startAndRecordButton,
+    submitButton,
+    recordButton,
     editButton,
     cancelEditButton,
     changeQuestionButton,
