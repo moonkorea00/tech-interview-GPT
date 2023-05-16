@@ -1,5 +1,5 @@
 import instance from '@api';
-import { mapSearchParamToValue, generatePrompt } from '../api.utils';
+import { mapSearchParamToValue, generatePrompt } from './completion.utils';
 import { FormValues } from '@@types/form';
 
 interface CompletionApiProps extends Omit<FormValues, 'editedTranscript'> {
@@ -32,7 +32,12 @@ const fetchOpenAICompletion = async ({
 
   const { data } = await instance.post('v1/completions', options, config);
 
-  return data;
+  const response = data.choices[0].text.trim();
+
+  return {
+    id: data.id,
+    response,
+  };
 };
 
 export default fetchOpenAICompletion;

@@ -1,4 +1,16 @@
-export const options = {
+export type Options = {
+  field: {
+    [key: string]: string;
+  };
+  experience: {
+    [key: string]: string;
+  };
+  lang: {
+    [key: string]: string;
+  };
+};
+
+export const options: Options = {
   field: {
     fe: 'Front-end',
     be: 'Back-end',
