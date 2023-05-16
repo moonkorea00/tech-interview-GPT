@@ -1,5 +1,5 @@
-import { options } from '@components/Main/Options/constants';
-import { optionsErrMap } from '../error';
+import { options } from '@components/Main/constants/InterviewOptions';
+import { optionsErrMap } from '../error/error';
 
 export const validateRequestOptions = (searchParams: URLSearchParams) => {
   const errors: string[] = [];
@@ -7,7 +7,7 @@ export const validateRequestOptions = (searchParams: URLSearchParams) => {
   Object.keys(options).forEach(key => {
     const value = searchParams.get(key);
 
-    if (!value || !Object.keys(options[key]).includes(value)) {
+    if (!value || !Object.keys(options[key as keyof typeof options]).includes(value)) {
       errors.push(optionsErrMap[key as keyof typeof optionsErrMap]);
     }
   });
