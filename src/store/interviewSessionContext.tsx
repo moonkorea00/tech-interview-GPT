@@ -1,73 +1,23 @@
-import type { Session, SessionContext } from '@@types/interviewSession';
+import type { Dispatch } from 'react';
+import type { State, Action } from '@@types/interviewSession';
 import type { ContextProviderProps } from './store.types';
-import { createContext, useState, useEffect } from 'react';
+import { createContext, useReducer } from 'react';
+import { initialState, sessionReducer } from '@reducer/sessionReducer';
 
-export const InterviewSessionContext = createContext<SessionContext | null>(
-  null
-);
+export const InterviewSessionContext = createContext<State | null>(null);
+export const InterviewSessionDispatchContext =
+  createContext<Dispatch<Action> | null>(null);
 
 export const InterviewSessionProvider = ({
   children,
 }: ContextProviderProps) => {
-  const [sessions, setSessions] = useState<Session[]>([]);
-  const [session, setSession] = useState<Session>();
-
-  const itemKey = 'interview_sessions';
-  
-  const readSessions = (initialValue = []): Session[] | [] => {
-    try {
-      const sessions = localStorage.getItem(itemKey);
-      if (sessions) {
-        return JSON.parse(sessions);
-      } else {
-        localStorage.setItem(itemKey, JSON.stringify(initialValue));
-        return initialValue;
-      }
-    } catch (err) {
-      console.warn(`Error reading item with ${itemKey}`);
-      return initialValue;
-    }
-  };
-
-  const saveSession = (session: Session) => {
-    try {
-      localStorage.setItem(
-        itemKey,
-        JSON.stringify([...readSessions(), session])
-      );
-      setSessions(prev => [...prev, session]);
-    } catch (err) {
-      // handleQuotaError();
-    }
-  };
-
-  const deleteSession = (id: string) => {
-    const newSessions = readSessions().filter(
-      (session: Session) => session.id !== id
-    );
-    localStorage.setItem(itemKey, JSON.stringify(newSessions));
-    setSessions(newSessions);
-  };
-
-  const readSessionById = (id: string) => {
-    const session = sessions.find(session => session.id === id);
-    setSession(session);
-  };
-
-  useEffect(() => setSessions(readSessions()), []);
+  const [sessionState, dispatch] = useReducer(sessionReducer, initialState);
 
   return (
-    <InterviewSessionContext.Provider
-      value={{
-        session,
-        sessions,
-        readSessions,
-        saveSession,
-        deleteSession,
-        readSessionById,
-      }}
-    >
-      {children}
+    <InterviewSessionContext.Provider value={sessionState}>
+      <InterviewSessionDispatchContext.Provider value={dispatch}>
+        {children}
+      </InterviewSessionDispatchContext.Provider>
     </InterviewSessionContext.Provider>
   );
 };

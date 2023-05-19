@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import eyeVisible from '@assets/Main/eye-visible.svg';
 import eyeHidden from '@assets/Main/eye-hidden.svg';
-import { useFormSelector } from '@hooks/useFormContext';
+import { useFormSelector } from '@store/formContext';
 import useForm from '@hooks/useForm';
 
 type OptionsInputProps = {

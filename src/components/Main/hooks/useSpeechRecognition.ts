@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { useFormDispatch } from '@hooks/useFormContext';
+import { useFormDispatch } from '@store/formContext';
 
 const useSpeechRecognition = () => {
   const [isRecording, setIsRecording] = useState(false);

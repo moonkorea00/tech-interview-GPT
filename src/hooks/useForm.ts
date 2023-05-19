@@ -1,20 +1,21 @@
 import type { ChangeEvent } from 'react';
+import type { Session } from '@@types/interviewSession';
 import { useEffect } from 'react';
 import { useSearchParams, useLocation } from 'react-router-dom';
 import { AxiosError } from 'axios';
-import { useFormSelector, useFormDispatch } from './useFormContext';
-import { useInterviewSessionSelector } from './useInterviewSessionContext';
+import { useFormSelector, useFormDispatch } from '@store/formContext';
+import useSession from './useSession';
 import fetchOpenAICompletion from '@api/completion';
 import { validateRequestOptions as onValidate } from '@utils/validation/validateRequestOptions';
 import { getAxiosError } from '@utils/error/error';
 
-const useForm = () => {
+const useForm = (retryQuestionCallback?: VoidFunction) => {
   const { search } = useLocation();
   const [searchParams] = useSearchParams();
 
   const formState = useFormSelector();
   const dispatch = useFormDispatch();
-  const { saveSession } = useInterviewSessionSelector()
+  const { session, saveSession } = useSession()
 
   const { formValues : { apiKey, question, transcript, editedTranscript } } = formState;
 
@@ -67,13 +68,16 @@ const useForm = () => {
     dispatch({ type: 'FORM/EDIT_CANCEL', payload: transcript });
   };
 
-  const handleRetryQuestion = (question: string) => {
-    dispatch({ type: 'FORM/RETRY_QUESTION', payload: question });
+  const handleRetryQuestion = () => {
+    dispatch({ type: 'FORM/RETRY_QUESTION', payload: (session as Session).question });
+    (retryQuestionCallback as VoidFunction)();
   };
 
-  useEffect(() => {
+  const resetForm = () => {
     if (!search) dispatch({ type: 'FORM/RESET' });
-  }, [search]);
+  }
+
+  useEffect(resetForm, [search]);
 
   return {
     formState,
