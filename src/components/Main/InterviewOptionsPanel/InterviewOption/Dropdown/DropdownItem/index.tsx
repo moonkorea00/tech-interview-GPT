@@ -1,6 +1,6 @@
-import { Dispatch, SetStateAction } from 'react';
-import Select from '@assets/Main/select.svg';
+import type { Dispatch, SetStateAction } from 'react';
 import useURLSearchParams from '@components/Main/hooks/useURLSearchParams';
+import Select from '@assets/Main/select.svg';
 
 type DropdownItemProps = {
   options: { [key: string]: string };

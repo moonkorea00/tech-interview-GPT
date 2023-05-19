@@ -3,8 +3,8 @@ import { NavLink } from 'react-router-dom';
 import destroy from '@assets/Nav/delete.svg';
 import confirm from '@assets/Nav/confirm.svg';
 import cancel from '@assets/Nav/cancel.svg';
-import { useInterviewSessionSelector } from '@hooks/useInterviewSessionContext';
 import useOnClickOutside from '@hooks/useOnClickOutside';
+import useSession from '@hooks/useSession';
 
 type NavItemProps = {
   id: string;
@@ -16,7 +16,8 @@ const NavItem = ({ id, navLabel }: NavItemProps) => {
   const [isDeleteMode, setIsDeleteMode] = useState(false);
   const navItemRef = useRef(null);
 
-  const { deleteSession } = useInterviewSessionSelector();
+  const { deleteSession } = useSession();
+  
   useOnClickOutside(navItemRef, () => setIsDeleteMode(false));
 
   return (

@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction } from 'react';
+import type { Dispatch, SetStateAction } from 'react';
 import Dropdown from '@assets/Main/dropdown.svg'
 
 type DropdownButtonProps ={

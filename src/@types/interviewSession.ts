@@ -6,11 +6,13 @@ export interface Session {
   search: string;
 }
 
-export interface SessionContext {
-  session?: Session;
-  sessions: Session[];
-  readSessions: (initialValue?: never[]) => Session[] | [];
-  saveSession: (session: Session) => void;
-  deleteSession: (id: string) => void;
-  readSessionById: (id: string) => void;
+export interface State {
+  sessions: Session[] | [];
+  session?: Session | null;
 }
+
+export type Action =
+  | { type: 'SESSION/GET_SESSIONS'; payload: Session[] | [] }
+  | { type: 'SESSION/SAVE_SESSION'; payload: Session }
+  | { type: 'SESSION/DELETE_SESSION'; payload: Session[] }
+  | { type: 'SESSION/GET_SESSION'; payload?: string };

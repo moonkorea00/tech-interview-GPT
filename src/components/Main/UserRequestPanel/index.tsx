@@ -1,29 +1,24 @@
 import DialogueInput from '@components/common/DialogueInput';
-import ActionButtonPanel from '../ActionButtonPanel';
-import src from '@assets/Main/user.svg';
-import { useFormSelector } from '@hooks/useFormContext';
+import ActionButtonPanel from './ActionButtonPanel';
+import user from '@assets/Main/user.svg';
+import { useFormSelector } from '@store/formContext';
 import useForm from '@hooks/useForm';
 
 const UserRequestPanel = () => {
-  const {
-    formValues: { transcript, editedTranscript },
-    isEditing,
-  } = useFormSelector();
+  const { formValues: { transcript, editedTranscript }, isEditing } = useFormSelector();
   const { handleChange } = useForm();
 
   return (
-    <div className="w-[950px]">
+    <section className="w-[950px]">
       <DialogueInput
-        {...{
-          src,
-          transcript,
-          isEditing,
-          editedTranscript,
-          handleChange,
-        }}
+        src={user}
+        transcript={transcript}
+        editedTranscript={editedTranscript}
+        isEditing={isEditing}
+        handleChange={handleChange}   
       />
       <ActionButtonPanel />
-    </div>
+    </section>
   );
 };
 

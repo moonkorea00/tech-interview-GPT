@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useEffect, RefObject, BaseSyntheticEvent } from 'react';
+import type { RefObject, BaseSyntheticEvent } from 'react';
+import { useEffect } from 'react';
 
 const useOnClickOutside = <T extends HTMLElement>(
   ref: RefObject<T>,

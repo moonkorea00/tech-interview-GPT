@@ -1,5 +1,5 @@
-import { Reducer } from 'react';
-import { State, Action } from '@@types/form';
+import type { Reducer } from 'react';
+import type { State, Action } from '@@types/form';
 
 const initialResponse =
   'Before we start, tell me more about yourself by filling out the options above. Your OpenAI key wont be required until you submit your answer so feel free to start the interview!';

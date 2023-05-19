@@ -1,37 +1,32 @@
-import { useEffect } from 'react';
+import type { Session as SessionType } from '@@types/interviewSession';
+// import { useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import DialogueInput from '@components/common/DialogueInput';
 import user from '@assets/Main/user.svg';
 import chatGPT from '@assets/Main/ChatGPT.svg';
 import ActionButton from '@components/common/Button';
 import useForm from '@hooks/useForm';
-import { useInterviewSessionSelector } from '@hooks/useInterviewSessionContext';
-import { Session as SessionType } from '@@types/interviewSession';
+import useSession from '@hooks/useSession';
 
 const Session = () => {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  const { handleRetryQuestion } = useForm();
-  const { session, readSessionById } = useInterviewSessionSelector();
+  const navgiateToMainWithSearchParams = () => navigate(`/${(session as SessionType).search}`);
 
-  const onRetry = () => {
-    handleRetryQuestion((session as SessionType).question);
-    navigate(`/${(session as SessionType).search}`);
-  };
+  const { handleRetryQuestion } = useForm(navgiateToMainWithSearchParams);
 
-  useEffect(() => readSessionById(id as string), [id, session, readSessionById]);
+  const { session } = useSession(false, id);
 
   return (
     <main className="flex flex-col items-center gap-20 w-[950px]">
       <div className="flex flex-col items-center w-full">
         <DialogueInput src={user} transcript={session?.transcript as string} />
         <ActionButton
-          onClickHandler={session ? onRetry : () => navigate('/')}
+          onClickHandler={session ? handleRetryQuestion : () => navigate('/')}
           variant="primary"
-        >
-          {session ? 'Try question again' : 'Start new interview'}
-        </ActionButton>
+          label={session ? 'Try question again' : 'Start new interview'}
+        />
       </div>
       <DialogueInput
         src={chatGPT}

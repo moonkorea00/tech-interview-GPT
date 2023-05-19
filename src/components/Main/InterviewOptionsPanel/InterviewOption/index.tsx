@@ -1,9 +1,9 @@
+import type { DropdownOptionsProps } from './Dropdown/types';
 import { useState, useRef } from 'react';
 import OptionLabel from './OptionLabel';
 import OptionsDropdown from './Dropdown';
 import OptionsInput from './Input';
 import useOnClickOutside from '@hooks/useOnClickOutside';
-import { DropdownOptionsProps } from './Dropdown/types';
 
 type InterviewOptionProps = {
   option: DropdownOptionsProps;

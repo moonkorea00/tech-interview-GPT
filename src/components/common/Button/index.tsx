@@ -1,4 +1,4 @@
-import { ActionButtonProps } from '@@types/form';
+import type { ActionButtonProps } from '@@types/form';
 
 const ActionButton = ({
   onClickHandler,

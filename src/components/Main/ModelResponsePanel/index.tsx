@@ -1,7 +1,7 @@
 import Flicker from '@assets/Main/Flicker.svg';
 import ChatGPT from '@assets/Main/ChatGPT.svg';
 import useTypingEffect from '../hooks/useTypingEffect';
-import { useFormSelector } from '@hooks/useFormContext';
+import { useFormSelector } from '@store/formContext';
 
 const ModelResponsePanel = () => {
   const { modelResponse, isLoading } = useFormSelector();
