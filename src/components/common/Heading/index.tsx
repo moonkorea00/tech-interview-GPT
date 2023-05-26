@@ -6,7 +6,7 @@ const Heading = () => {
       </h1>
       <p className="w-full px-5 text-2xl sm:text-xl font-light text-center">
         Start a<span className="underline decoration-sky"> speech to text</span>{' '}
-        Tech Interview with an Senior AI Web Developer and{' '}
+        Tech Interview with a Senior AI Software Engineer and{' '}
         <span className="underline decoration-sky">get Instant Feedback</span>
       </p>
     </div>

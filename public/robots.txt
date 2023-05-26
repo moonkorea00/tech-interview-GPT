@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://tech-interview-gpt.vercel.app/
+
+# Sitemaps
+Sitemap: https://tech-interview-gpt.vercel.app/sitemap.xml
