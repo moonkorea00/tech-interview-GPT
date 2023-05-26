@@ -1,4 +1,4 @@
-import Flicker from '@assets/Main/Flicker.svg';
+import Flicker from '@assets/Main/flicker.svg';
 import ChatGPT from '@assets/Main/ChatGPT.svg';
 import useTypingEffect from '../hooks/useTypingEffect';
 import { useFormSelector } from '@store/formContext';
