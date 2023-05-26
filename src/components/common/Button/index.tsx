@@ -15,7 +15,7 @@ const ActionButton = ({
   return (
     <button
       onClick={onClickHandler}
-      className={`rounded-xl px-3 py-1.5 text-sm font-semibold ${buttonClasses} ${
+      className={`rounded-xl px-3 py-1.5 text-sm sm:text-xs font-semibold ${buttonClasses} ${
         disabled && 'cursor-not-allowed'
       } ${className}`}
       disabled={disabled}

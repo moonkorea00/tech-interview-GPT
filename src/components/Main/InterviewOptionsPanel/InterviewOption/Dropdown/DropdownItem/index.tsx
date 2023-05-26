@@ -24,7 +24,7 @@ const DropdownItem = ({
   return (
     <li
       onClick={() => setURLSearchParams(name, value)}
-      className="w-full relative py-2 pl-3 pr-9 cursor-pointer hover:bg-indigo-100"
+      className="w-full relative py-2 sm:py-1.5 pl-3 pr-9 cursor-pointer hover:bg-indigo-100"
     >
       <div className="flex items-center">
         <span

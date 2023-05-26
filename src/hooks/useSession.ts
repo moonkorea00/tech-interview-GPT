@@ -32,8 +32,7 @@ const useSession = (skip = true, params: string | undefined = undefined) => {
       storage.set(ITEM_KEY, [...sessions, value]);
       dispatch({ type: 'SESSION/SAVE_SESSION', payload: value });
     } catch (err) {
-      console.log(err);
-      // handleQuotaError();
+      console.warn(`Failed to save session : ${err}`)
     }
   };
 
@@ -45,8 +44,7 @@ const useSession = (skip = true, params: string | undefined = undefined) => {
       storage.set(ITEM_KEY, newSessions);
       dispatch({ type: 'SESSION/DELETE_SESSION', payload: newSessions });
     } catch (err) {
-      console.log(err);
-      // handleQuotaError();
+      console.warn(`Failed to delete session : ${err}`)
     }
   };
 
