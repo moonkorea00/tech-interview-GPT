@@ -1,6 +1,6 @@
 import { useSearchParams } from 'react-router-dom';
 
-const useURLSearchParams = (cb: Function) => {
+const useURLSearchParams = (cb: VoidFunction) => {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const setURLSearchParams = (key: string, value: string) => {

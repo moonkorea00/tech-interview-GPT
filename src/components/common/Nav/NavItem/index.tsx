@@ -32,7 +32,7 @@ const NavItem = ({ id, navLabel }: NavItemProps) => {
     >
       <li>
         <div className="flex justify-between">
-          <span className="w-[270px] truncate">{navLabel}</span>
+          <span className="w-[200px] lg:w-[260px] truncate sm:text-sm">{navLabel}</span>
           <div className="flex justify-end gap-2 w-14">
             {isDeleteMode ? (
               <>

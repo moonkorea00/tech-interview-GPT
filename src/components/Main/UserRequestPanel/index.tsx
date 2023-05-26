@@ -9,10 +9,10 @@ const UserRequestPanel = () => {
   const { handleChange } = useForm();
 
   return (
-    <section className="w-[950px]">
+    <section className="flex flex-col items-center w-[950px] xl:w-[730px] lg:w-[100%] lg:px-[40px] md:px-[20px] sm:px-[10px]">
       <DialogueInput
         src={user}
-        transcript={transcript}
+        transcript={transcript} 
         editedTranscript={editedTranscript}
         isEditing={isEditing}
         handleChange={handleChange}   

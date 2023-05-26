@@ -9,7 +9,7 @@ type DropdownButtonProps ={
 const DropdownButton = ({ selectedOption, setIsDropdownOpen }:DropdownButtonProps) => {
   return (
     <button
-      className="relative w-full rounded-md bg-white py-1.5 pl-3 pr-10 text-left shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-2 focus:ring-secondary sm:text-sm sm:leading-6"
+      className="relative w-full rounded-md bg-white py-1.5 sm:py-1 pl-3 pr-10 text-left shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-2 focus:ring-secondary sm:text-sm sm:leading-6"
       onClick={() => setIsDropdownOpen(prev => !prev)}
     >
       <span className="flex items-center">

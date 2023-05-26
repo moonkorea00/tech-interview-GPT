@@ -18,7 +18,7 @@ const InterviewOption = ({ option }: InterviewOptionProps) => {
   useOnClickOutside(optionRef, () => setIsDropdownOpen(false));
 
   return (
-    <div className="relative w-[200px] mx-4" ref={optionRef}>
+    <div className="relative w-[200px]" ref={optionRef}>
       <OptionLabel label={label} tooltipContent={tooltipContent} />
       {type === 'dropdown' && (
         <OptionsDropdown

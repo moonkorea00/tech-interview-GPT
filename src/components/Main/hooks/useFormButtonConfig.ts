@@ -59,7 +59,7 @@ const useFormButtonConfig = () => {
     onClickHandler: handleGetQuestion,
     variant: 'secondary',
     label: 'Change question',
-    className: 'absolute right-0',
+    className: 'absolute right-0 md:static',
     disabled: isRecording || isEditing || isLoading,
     shouldRender: isValid,
   };
