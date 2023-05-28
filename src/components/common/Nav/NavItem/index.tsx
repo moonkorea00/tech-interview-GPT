@@ -9,15 +9,15 @@ import useSession from '@hooks/useSession';
 type NavItemProps = {
   id: string;
   navLabel: string;
-  search: string;
+  toggleNavBar?: () => void;
 };
 
-const NavItem = ({ id, navLabel }: NavItemProps) => {
+const NavItem = ({ id, navLabel, toggleNavBar }: NavItemProps) => {
   const [isDeleteMode, setIsDeleteMode] = useState(false);
   const navItemRef = useRef(null);
 
   const { deleteSession } = useSession();
-  
+
   useOnClickOutside(navItemRef, () => setIsDeleteMode(false));
 
   return (
@@ -29,25 +29,36 @@ const NavItem = ({ id, navLabel }: NavItemProps) => {
         }`
       }
       ref={navItemRef}
+      onClick={toggleNavBar}
     >
       <li>
         <div className="flex justify-between">
-          <span className="w-[200px] lg:w-[260px] truncate sm:text-sm">{navLabel}</span>
+          <span className="w-[200px] lg:w-[260px] truncate sm:text-sm">
+            {navLabel}
+          </span>
           <div className="flex justify-end gap-2 w-14">
             {isDeleteMode ? (
               <>
                 <img
                   src={confirm}
                   alt="confirm"
-                  className="w-[18px]"
-                  onClick={() => deleteSession(id)}
+                  className="w-[18px] border"
+                  onClick={e => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    deleteSession(id);
+                  }}
                 />
 
                 <img
                   src={cancel}
                   alt="cancel"
                   className="w-[16px]"
-                  onClick={() => setIsDeleteMode(false)}
+                  onClick={e => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    setIsDeleteMode(false);
+                  }}
                 />
               </>
             ) : (
@@ -56,7 +67,11 @@ const NavItem = ({ id, navLabel }: NavItemProps) => {
                   src={destroy}
                   alt="delete"
                   className="w-[16px]"
-                  onClick={() => setIsDeleteMode(true)}
+                  onClick={e => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    setIsDeleteMode(true);
+                  }}
                 />
               </>
             )}
