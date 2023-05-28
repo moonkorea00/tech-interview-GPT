@@ -1,10 +1,10 @@
 import type { Session as SessionType } from '@@types/interviewSession';
-// import { useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import MainLayout from '@components/common/Layout/Main';
 import DialogueInput from '@components/common/DialogueInput';
+import ActionButton from '@components/common/Button';
 import user from '@assets/Main/user.svg';
 import chatGPT from '@assets/Main/ChatGPT.svg';
-import ActionButton from '@components/common/Button';
 import useForm from '@hooks/useForm';
 import useSession from '@hooks/useSession';
 
@@ -19,8 +19,8 @@ const Session = () => {
   const { session } = useSession(false, id);
 
   return (
-    <main className="flex flex-col items-center gap-20 w-[950px]">
-      <div className="flex flex-col items-center w-full">
+    <MainLayout>
+      <div className="flex flex-col items-center w-full mb-6">
         <DialogueInput src={user} transcript={session?.transcript as string} />
         <ActionButton
           onClickHandler={session ? handleRetryQuestion : () => navigate('/')}
@@ -36,7 +36,7 @@ const Session = () => {
             : `Couldn't find your session history. Try Starting a new Interview.`
         }
       />
-    </main>
+    </MainLayout>
   );
 };
 

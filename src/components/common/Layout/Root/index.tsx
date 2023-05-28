@@ -1,7 +1,7 @@
 import { Outlet } from 'react-router-dom';
-import Heading from '../Heading';
-import Nav from '../Nav';
-import NavBar from '../Nav/NavBar';
+import Heading from '../../Heading';
+import Nav from '../../Nav';
+import NavBar from '../../Nav/NavBar';
 
 const RootLayout = () => {
   return (
