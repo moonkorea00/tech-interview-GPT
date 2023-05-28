@@ -16,7 +16,7 @@ const DialogueInput = ({
   handleChange,
 }: DialogueInputProps) => {
   return (
-    <div className="flex w-full">
+    <section className="flex w-full">
       <img src={src} alt="user" className="w-[50px] md:w-[40px] mr-4 md:mr-2 sm:mr-1 self-start" />
       {isEditing ? (
         <textarea
@@ -31,7 +31,7 @@ const DialogueInput = ({
           <p>{transcript}</p>
         </div>
       )}
-    </div>
+    </section>
   );
 };
 

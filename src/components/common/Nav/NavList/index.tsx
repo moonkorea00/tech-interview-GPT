@@ -1,7 +1,11 @@
-import { useInterviewSessionSelector } from '@store/interviewSessionContext';
 import NavItem from '../NavItem';
+import { useInterviewSessionSelector } from '@store/interviewSessionContext';
 
-const NavList = () => {
+type NavListProps = {
+  toggleNavBar?:() => void;
+};
+
+const NavList = ({ toggleNavBar }: NavListProps) => {
   const { sessions } = useInterviewSessionSelector();
 
   return (
@@ -10,8 +14,8 @@ const NavList = () => {
         Session History
       </p>
       <ul className="flex flex-col gap-2">
-        {sessions?.map(({ id, question, search }) => (
-          <NavItem key={id} id={id} navLabel={question} search={search} />
+        {sessions?.map(({ id, question }) => (
+          <NavItem key={id} id={id} navLabel={question} toggleNavBar={toggleNavBar} />
         ))}
         {sessions?.length === 0 && (
           <p className="p-3 text-sm rounded-md">No history</p>

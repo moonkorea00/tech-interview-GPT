@@ -7,7 +7,7 @@ import {
 } from 'react-router-dom';
 import { FormProvider } from '@store/formContext';
 import { InterviewSessionProvider } from '@store/interviewSessionContext';
-import RootLayout from './components/common/Layout';
+import RootLayout from './components/common/Layout/Root';
 import Main from './components/Main';
 import Session from '@components/Session';
 
