@@ -93,7 +93,13 @@ export const formReducer: Reducer<State, Action> = (
     case 'FORM/RESET':
       return initialState;
     case 'FORM/RETRY_QUESTION':
-      return { ...state, modelResponse: payload, isValid: true, isRetry: true };
+      return {
+        ...state,
+        formValues: { ...state.formValues, question: payload },
+        modelResponse: payload,
+        isValid: true,
+        isRetry: true,
+      };
     default:
       return state;
   }
