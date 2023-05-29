@@ -19,7 +19,7 @@ const Session = () => {
   const { session } = useSession(false, id);
 
   return (
-    <MainLayout>
+    <MainLayout tag='main'>
       <div className="flex flex-col items-center w-full mb-6">
         <DialogueInput src={user} transcript={session?.transcript as string} />
         <ActionButton

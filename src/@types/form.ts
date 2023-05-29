@@ -1,4 +1,4 @@
-import { MouseEventHandler } from "react";
+import type { MouseEventHandler, ReactNode } from 'react';
 
 export interface FormValues {
   apiKey: string;
@@ -36,9 +36,10 @@ export type Action =
   | { type: 'FORM/RETRY_QUESTION'; payload: string };
 
 export type ActionButtonProps = {
+  id?: number;
   onClickHandler: MouseEventHandler<HTMLButtonElement>;
   variant: string;
-  label: string;
+  label: string | ReactNode;
   className?: string;
   disabled?: boolean;
 };
