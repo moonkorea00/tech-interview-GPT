@@ -13,7 +13,7 @@ const httpStatusErrMap: Record<HttpStatus, string> = {
   404: 'The requested resource could not be found.',
   429: `We're experiencing high traffic or you have exceeded your current quota. Please check your plan and billing details at https://platform.openai.com/account/billing/limits.`,
   500: 'The server had an error while processing your request. Retry submitting your answer after a brief wait.',
-  503: 'The server is currently unavailable. Retry your submitting your answer after a brief wait.',
+  503: 'The server is currently unavailable. Retry submitting your answer after a brief wait.',
 };
 
 export const getAxiosError = (err: AxiosError) => {
@@ -25,6 +25,6 @@ export const getAxiosError = (err: AxiosError) => {
   if (httpStatus in httpStatusErrMap) {
     return httpStatusErrMap[httpStatus as HttpStatus];
   } else {
-    return `[${err.message}]: Retry your submitting your answer after a brief wait.`;
+    return `[${err.message}]: Retry submitting your answer after a brief wait.`;
   }
 };
