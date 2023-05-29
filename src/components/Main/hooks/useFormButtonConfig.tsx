@@ -1,4 +1,5 @@
 import type { ActionButtonProps } from '@@types/form';
+import spinner from '@assets/Main/spinner.svg'
 import useForm from '@hooks/useForm';
 import { useFormSelector } from '@store/formContext';
 import useSpeechRecognition from './useSpeechRecognition';
@@ -17,6 +18,7 @@ const useFormButtonConfig = () => {
   const isFormReadyToSubmit = Boolean(transcript) && !isRecording;
 
   const startInterviewButton = {
+    id: 1,
     onClickHandler: handleValidateForm,
     variant: 'primary',
     label: 'Start Interview',
@@ -24,14 +26,16 @@ const useFormButtonConfig = () => {
   };
 
   const submitButton = {
+    id: 2,
     onClickHandler: handleSubmitForm,
     variant: 'primary',
-    label: 'Submit Answer',
+    label: isLoading ? <img src={spinner} alt='loading' className='mx-8'/> : 'Submit Answer',
     disabled: isLoading || isEditing || !isFormReadyToSubmit,
     shouldRender: isValid && isFormReadyToSubmit,
   };
 
   const recordButton = {
+    id: 3,
     onClickHandler: isRecording ? stopSpeechRecognition : startSpeechRecognition,
     variant: 'primary',
     label: isRecording ? 'Stop Recording' : 'Start Recording Answer',
@@ -41,6 +45,7 @@ const useFormButtonConfig = () => {
   };
 
   const editButton = {
+    id: 4,
     onClickHandler: isEditing ? handleSaveEdit : handleEditMode,
     variant: 'secondary',
     label: isEditing ? 'Save' : 'Edit',
@@ -49,6 +54,7 @@ const useFormButtonConfig = () => {
   };
 
   const cancelEditButton = {
+    id: 5,
     onClickHandler: handleCancelEdit,
     variant: 'secondary',
     label: 'Cancel',
@@ -56,6 +62,7 @@ const useFormButtonConfig = () => {
   };
 
   const changeQuestionButton = {
+    id: 6,
     onClickHandler: handleGetQuestion,
     variant: 'secondary',
     label: 'Change question',

@@ -1,5 +1,5 @@
 import type { Options, DropdownOptionsProps } from './types';
-import { Dispatch, SetStateAction } from 'react';
+import type { Dispatch, SetStateAction } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import DropdownButton from './DropdownButton';
 import DropdownList from './DropdownList';
