@@ -20,7 +20,7 @@
 
 - 🧑‍💻 **Interview Feedback** - Provides in depth <b>feedback</b> powered by <b>ChatGPT</b>.
 - 🛠 **Customizable** - Get questions and feedback based on your <b>development field</b>, <b>work experience</b> and choice of <b>spoken language</b>.
-- 🎙 **Speech Recognition** - <b>Record</b> and <b>edit</b> answer using <a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Speech_API" target="_blank" rel="noopener"><b>speech recognition</b></a>.
+- 🎙 **Speech Recognition** - <b>Record</b> and <b>edit</b> answer using <a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Speech_API" target="_blank" rel="noopener"><b>speech recognition</b>(<a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Speech_API#browser_compatibility" target="_blank" rel="noopener">See browser compatibility</a>)</a>.
 - 📝 **Interview Log** - Automatically save interview to <b>history</b> for user to see previous interviews and <b>retry</b> on request.
 - 💻 **Device Friendly** - <b>responsive design</b> for various devices.
 
@@ -59,7 +59,7 @@ npm run start
 
 - **Record/Edit Answer**
 
-![speech-recognition](https://github.com/moonkorea00/moonkorea/assets/78708082/85a9424c-98ed-4dc6-ba8e-f69c650fe6b9)
+![speech_recognition](https://github.com/moonkorea00/tech-interview-GPT/assets/78708082/e6226cfe-18fa-457e-9475-2e811a739220)
 
 
 - **Get Interview Feedback**
@@ -71,6 +71,18 @@ npm run start
 
 ![history](https://github.com/moonkorea00/moonkorea/assets/78708082/588d1cd5-6cf6-4aba-be8e-3cbb54ea74c4)
 
+
+<br>
+
+## Releases
+
+### 1.0.0
+
+Initial Release
+
+### 1.0.1
+
+Check user's browser compatibility for web speech API
 
 <br>
 
