@@ -12,9 +12,9 @@ type FormButtonConfig = ActionButtonProps & {
 const useFormButtonConfig = () => {
   const { formValues: { transcript }, isValid, isEditing, isLoading, isRetry } = useFormSelector();
   const { handleValidateForm, handleSubmitForm, handleEditMode, handleSaveEdit, handleCancelEdit } = useForm();
-  const { isRecording, startSpeechRecognition, stopSpeechRecognition } = useSpeechRecognition();
+  const { isRecording, isBrowserUnsupported, mediaDeviceErr, setMediaDeviceErr, startSpeechRecognition, stopSpeechRecognition }= useSpeechRecognition();
   const { handleGetQuestion } = useGetQuestion(!isRetry && isValid);
-
+  
   const isFormReadyToSubmit = Boolean(transcript) && !isRecording;
 
   const startInterviewButton = {
@@ -39,8 +39,10 @@ const useFormButtonConfig = () => {
     onClickHandler: isRecording ? stopSpeechRecognition : startSpeechRecognition,
     variant: 'primary',
     label: isRecording ? 'Stop Recording' : 'Start Recording Answer',
+    tooltipContent: mediaDeviceErr,
+    setTooltipContent: setMediaDeviceErr,
     className: isRecording ? 'animate-fade-in-out' : '',
-    disabled: isEditing || isFormReadyToSubmit,
+    disabled: isEditing || isFormReadyToSubmit || isBrowserUnsupported,
     shouldRender: isValid && !isFormReadyToSubmit,
   };
 

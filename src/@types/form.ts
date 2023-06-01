@@ -40,6 +40,8 @@ export type ActionButtonProps = {
   onClickHandler: MouseEventHandler<HTMLButtonElement>;
   variant: string;
   label: string | ReactNode;
+  tooltipContent?: string;
+  setTooltipContent?: (React.Dispatch<React.SetStateAction<string>>);
   className?: string;
   disabled?: boolean;
 };
