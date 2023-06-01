@@ -1,11 +1,28 @@
 import { AxiosError } from 'axios';
 
+// interview options
 export const optionsErrMap = {
   field: 'Development Field',
   experience: 'Work Experience',
   lang: 'Language',
 };
 
+// speech recognition
+export const speechRecognitionErrMap = {
+  userMedia: {
+    NotAllowedError:
+      'Please enable microphone access in your browser settings or continue by typing your answer.',
+    NotFoundError:
+      'Dont have a microphone? Try submitting your answer by clicking "Edit".',
+    NotReadableError: `Your audio device currently isn't producing a usable signal and is currently not available. Please check your device or try submitting your answer by clicking "Edit".`,
+  },
+  unsupported:
+    'Speech Recognition is not supported in this browser. Try submitting your answer by clicking "Edit".',
+  connection:
+    'Dont have a microphone? Try submitting your answer by clicking "Edit".',
+};
+
+// axios
 type HttpStatus = 401 | 404 | 429 | 500 | 503;
 
 const httpStatusErrMap: Record<HttpStatus, string> = {
