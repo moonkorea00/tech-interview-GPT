@@ -38,6 +38,7 @@ Install [Node.js](https://nodejs.org/) and run the following command:
 
 ```bash
 npm run start
+# open http://localhost:8000/ in your browser
 ```
 
 <br>
